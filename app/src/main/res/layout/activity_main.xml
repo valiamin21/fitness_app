@@ -7,7 +7,7 @@
     tools:context=".SplashActivity"
     android:background="@drawable/splash_image">
 
-    <TextView
+    <ir.proglovving.cfviews.CfTextView
         android:id="@+id/motivation_sentence_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,2 +1,3 @@
+include ':CfViews'
 include ':app'
 rootProject.name = "FitApp"

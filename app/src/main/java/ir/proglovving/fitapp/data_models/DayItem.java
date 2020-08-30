@@ -1,6 +1,6 @@
 package ir.proglovving.fitapp.data_models;
 
-public class DayListItem {
+public class DayItem {
     private int id;
     private String title;
     private int exercisesCount;

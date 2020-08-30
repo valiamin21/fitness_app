@@ -5,7 +5,7 @@ import java.util.List;
 public class PlansPackItem {
     private int id;
     private String title;
-    private List<PlanListItem> planListItems;
+    private List<PlanItem> planItems;
 
     public int getId() {
         return id;
@@ -23,11 +23,11 @@ public class PlansPackItem {
         this.title = title;
     }
 
-    public List<PlanListItem> getPlanListItems() {
-        return planListItems;
+    public List<PlanItem> getPlanItems() {
+        return planItems;
     }
 
-    public void setPlanListItems(List<PlanListItem> planListItems) {
-        this.planListItems = planListItems;
+    public void setPlanItems(List<PlanItem> planItems) {
+        this.planItems = planItems;
     }
 }

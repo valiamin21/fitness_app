@@ -1,6 +1,6 @@
 package ir.proglovving.fitapp.data_models;
 
-public class ExerciseListItem {
+public class ExerciseItem {
 
     public enum ExerciseType{
         TIMES,

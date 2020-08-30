@@ -1,6 +1,6 @@
 package ir.proglovving.fitapp.data_models;
 
-public class ExerciseDetailItem extends ExerciseListItem{
+public class Exercise extends ExerciseItem {
     private String description;
     private String walkthrough;
     private String involvedMuscles;

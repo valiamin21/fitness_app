@@ -1,6 +1,6 @@
 package ir.proglovving.fitapp.data_models;
 
-public class PlanListItem {
+public class PlanItem {
     private int id;
     private String title;
     private String image;

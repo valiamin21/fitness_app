@@ -7,23 +7,6 @@
     tools:context=".MainActivity"
     android:background="@drawable/splash_image">
 
-    <ir.proglovving.cfviews.CfTextView
-        android:id="@+id/motivation_sentence_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="سلامتی حاصل ورزش روزانه است!"
-        android:textSize="@dimen/standard_font_size_very_large"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/splashTextColor"
-        android:textStyle="bold"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+    <include layout="@layout/layout_splash_loading"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,43 @@
 package ir.proglovving.fitapp.data_models;
 
-public class Exercise extends ExerciseItem {
+import com.google.gson.annotations.SerializedName;
+
+public class Exercise {
+
+    private int id;
+    private String title;
+    private String gif;
     private String description;
     private String walkthrough;
+    private boolean isTimed;
+    private int time;
+    @SerializedName("muscles_involved")
     private String involvedMuscles;
-    private int KCalories;
-    private int level;
+    private float kcal;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getGif() {
+        return gif;
+    }
+
+    public void setGif(String gif) {
+        this.gif = gif;
+    }
 
     public String getDescription() {
         return description;
@@ -23,6 +55,22 @@ public class Exercise extends ExerciseItem {
         this.walkthrough = walkthrough;
     }
 
+    public boolean isTimed() {
+        return isTimed;
+    }
+
+    public void setTimed(boolean timed) {
+        isTimed = timed;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
     public String getInvolvedMuscles() {
         return involvedMuscles;
     }
@@ -31,19 +79,11 @@ public class Exercise extends ExerciseItem {
         this.involvedMuscles = involvedMuscles;
     }
 
-    public int getKCalories() {
-        return KCalories;
+    public float getKcal() {
+        return kcal;
     }
 
-    public void setKCalories(int KCalories) {
-        this.KCalories = KCalories;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
+    public void setKcal(float kcal) {
+        this.kcal = kcal;
     }
 }

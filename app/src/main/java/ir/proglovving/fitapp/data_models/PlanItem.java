@@ -1,12 +1,14 @@
 package ir.proglovving.fitapp.data_models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PlanItem {
     private int id;
-    private String title;
     private String image;
+    private String title;
     private String level;
+    @SerializedName("total_days")
     private int daysCount;
-    private int doneDaysCount;
 
     public int getId() {
         return id;
@@ -16,20 +18,20 @@ public class PlanItem {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getLevel() {
@@ -48,15 +50,4 @@ public class PlanItem {
         this.daysCount = daysCount;
     }
 
-    public int getDoneDaysCount() {
-        return doneDaysCount;
-    }
-
-    public void setDoneDaysCount(int doneDaysCount) {
-        this.doneDaysCount = doneDaysCount;
-    }
-
-    public int getDonePercent(){
-        return doneDaysCount * 100 / daysCount;
-    }
 }

@@ -6,6 +6,8 @@ import java.util.List;
 
 public class CategoriesPack {
     private int count;
+    @SerializedName("results")
+    private List<CategoryItem> categoryItemList;
 
     public int getCount() {
         return count;
@@ -15,14 +17,11 @@ public class CategoriesPack {
         this.count = count;
     }
 
-    public List<Category> getCategoryList() {
-        return categoryList;
+    public List<CategoryItem> getCategoryItemList() {
+        return categoryItemList;
     }
 
-    public void setCategoryList(List<Category> categoryList) {
-        this.categoryList = categoryList;
+    public void setCategoryList(List<CategoryItem> categoryItemList) {
+        this.categoryItemList = categoryItemList;
     }
-
-    @SerializedName("results")
-    private List<Category> categoryList;
 }

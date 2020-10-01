@@ -1,13 +1,16 @@
 package ir.proglovving.fitapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import ir.proglovving.fitapp.adapters.CategoryItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;
 import ir.proglovving.fitapp.data_models.CategoriesPack;
@@ -19,14 +22,15 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
+    private ConstraintLayout splashContainer;
     private TextView motivationSentenceTextView;
+    private RecyclerView categoryItemListRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initViews();
 
         ApiService apiService = RetrofitClient.getInstance().create(ApiService.class);
@@ -39,28 +43,24 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                Toast.makeText(MainActivity.this, "successful", Toast.LENGTH_SHORT).show();
+                splashContainer.setVisibility(View.GONE);
                 CategoriesPack categoriesPack = response.body();
-//                motivationSentenceTextView.setText("count: " + categoriesPack.getCount() + "\n");
-//                motivationSentenceTextView.append("\n[\n\n");
-//                for(CategoryItem categoryItem : categoriesPack.getCategoryItemList()){
-//                    motivationSentenceTextView.append("id: " + categoryItem.getId() + "\n");
-//                    motivationSentenceTextView.append("name: " + categoryItem.getName() + "\n");
-//                    motivationSentenceTextView.append("image: " + categoryItem.getImage() + "\n\n");
-//                }
-//                motivationSentenceTextView.append("]");
+                CategoryItemsRecyclerAdapter categoryItemsRecyclerAdapter = new CategoryItemsRecyclerAdapter(MainActivity.this,categoriesPack.getCategoryItemList());
+                categoryItemListRecyclerView.setAdapter(categoryItemsRecyclerAdapter);
 
             }
 
             @Override
             public void onFailure(Call<CategoriesPack> call, Throwable t) {
+                // TODO: 9/30/20
                 Toast.makeText(MainActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });
     }
 
     private void initViews() {
+        splashContainer = findViewById(R.id.splash_container);
         motivationSentenceTextView = findViewById(R.id.motivation_sentence_tv);
+        categoryItemListRecyclerView = findViewById(R.id.category_item_list_recycler_view);
     }
 }

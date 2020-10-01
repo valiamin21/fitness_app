@@ -2,22 +2,23 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/splash_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/splash_image">
+    android:background="@drawable/splash_image"
+    tools:context=".MainActivity">
 
     <ir.proglovving.cfviews.CfTextView
         android:id="@+id/motivation_sentence_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="سلامتی حاصل ورزش روزانه است!"
+        android:textColor="@color/splashTextColor"
         android:textSize="@dimen/standard_font_size_very_large"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/splashTextColor"
-        android:textStyle="bold"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

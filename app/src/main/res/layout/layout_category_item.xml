@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/standard_margin_x2"
+    android:layout_marginTop="@dimen/standard_margin_x2"
+    android:layout_marginRight="@dimen/standard_margin_x2"
+    android:layout_marginBottom="@dimen/standard_margin"
+    app:cardCornerRadius="@dimen/app_radius"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    app:cardElevation="@dimen/app_cards_elevation">
+
+    <ImageView
+        android:id="@+id/category_item_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        tools:src="@drawable/test_image"
+        android:scaleType="centerCrop"/>
+
+    <ir.proglovving.cfviews.CfTextView
+        android:id="@+id/category_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:textColor="#FFF"
+        android:textSize="@dimen/standard_font_size_very_large"
+        android:textStyle="bold"
+        tools:text="شکم"
+        android:gravity="center"
+        android:background="#44333333"/>
+
+</androidx.cardview.widget.CardView>

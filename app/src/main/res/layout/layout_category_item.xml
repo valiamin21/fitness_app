@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:textColor="#FFF"
+        android:textColor="@color/picturesTextColor"
         android:textSize="@dimen/standard_font_size_very_large"
         android:textStyle="bold"
         tools:text="شکم"

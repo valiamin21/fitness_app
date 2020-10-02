@@ -1,7 +1,11 @@
 package ir.proglovving.cfviews;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class CTypefaceProvider {
     public static final int VAZIR_NORMAL = 0;
@@ -31,6 +35,18 @@ public class CTypefaceProvider {
             vazirBold = Typeface.createFromAsset(context.getAssets(), "fonts/Vazir-Bold.ttf");
         }
         return vazirBold;
+    }
+
+    public static void applyFontForAViewGroup(ViewGroup viewGroup,  Typeface typeface) {
+        View view;
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            view = viewGroup.getChildAt(i);
+            if (view instanceof TextView) {
+                ((TextView) view).setTypeface(typeface);
+            } else if (view instanceof ViewGroup) {
+                applyFontForAViewGroup((ViewGroup) view, typeface);
+            }
+        }
     }
 
 }

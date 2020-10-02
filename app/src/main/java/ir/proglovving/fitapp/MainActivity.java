@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
 
+import ir.proglovving.cfviews.CTypefaceProvider;
 import ir.proglovving.fitapp.adapters.CategoryItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;
@@ -68,5 +69,7 @@ public class MainActivity extends AppCompatActivity {
         categoryItemListRecyclerView = findViewById(R.id.category_item_list_recycler_view);
         appBarLayout = findViewById(R.id.appbarLayout);
         appBarLayout.setVisibility(View.INVISIBLE);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        CTypefaceProvider.applyFontForAViewGroup(toolbar,CTypefaceProvider.getVazir(this));
     }
 }

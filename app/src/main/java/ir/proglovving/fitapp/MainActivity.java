@@ -1,6 +1,7 @@
 package ir.proglovving.fitapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import ir.proglovving.fitapp.adapters.CategoryItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private ConstraintLayout splashContainer;
     private TextView motivationSentenceTextView;
     private RecyclerView categoryItemListRecyclerView;
+    private AppBarLayout appBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "error code : " + response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                appBarLayout.setVisibility(View.VISIBLE);
                 splashContainer.setVisibility(View.GONE);
                 CategoriesPack categoriesPack = response.body();
                 CategoryItemsRecyclerAdapter categoryItemsRecyclerAdapter = new CategoryItemsRecyclerAdapter(MainActivity.this,categoriesPack.getCategoryItemList());
@@ -62,5 +66,7 @@ public class MainActivity extends AppCompatActivity {
         splashContainer = findViewById(R.id.splash_container);
         motivationSentenceTextView = findViewById(R.id.motivation_sentence_tv);
         categoryItemListRecyclerView = findViewById(R.id.category_item_list_recycler_view);
+        appBarLayout = findViewById(R.id.appbarLayout);
+        appBarLayout.setVisibility(View.INVISIBLE);
     }
 }

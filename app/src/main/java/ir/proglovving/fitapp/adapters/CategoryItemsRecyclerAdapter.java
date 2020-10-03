@@ -44,6 +44,7 @@ public class CategoryItemsRecyclerAdapter extends RecyclerView.Adapter<CategoryI
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlanItemsActivity.class);
                 intent.putExtra(PlanItemsActivity.INTENT_KEY_CATEGORY_ID,categoryItemList.get(position).getId());
+                intent.putExtra(PlanItemsActivity.INTENT_KEY_CATEGORY_NAME,categoryItemList.get(position).getName());
                 context.startActivity(intent);
             }
         });

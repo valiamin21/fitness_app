@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import ir.proglovving.cfviews.CTypefaceProvider;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.adapters.PlanItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
@@ -21,6 +22,7 @@ import retrofit2.Response;
 public class PlanItemsActivity extends AppCompatActivity {
 
     public static final String INTENT_KEY_CATEGORY_ID = "categoryId";
+    public static final String INTENT_KEY_CATEGORY_NAME= "categoryName";
 
     private Toolbar toolbar;
     private RecyclerView planItemsRecyclerView;
@@ -31,6 +33,8 @@ public class PlanItemsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_items);
         initViews();
+
+        toolbar.setTitle(getIntent().getStringExtra(INTENT_KEY_CATEGORY_NAME));
 
         ApiService apiService = RetrofitClient.getApiService();
         Call<Category> categoryCall = apiService.getCategory(getIntent().getIntExtra(INTENT_KEY_CATEGORY_ID,-1));
@@ -60,5 +64,12 @@ public class PlanItemsActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         planItemsRecyclerView = findViewById(R.id.plan_item_list_recycler_view);
         progressBar = findViewById(R.id.progressBar);
+
+        toolbar.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                CTypefaceProvider.applyFontForAViewGroup(toolbar,CTypefaceProvider.getVazir(PlanItemsActivity.this));
+            }
+        },10);
     }
 }

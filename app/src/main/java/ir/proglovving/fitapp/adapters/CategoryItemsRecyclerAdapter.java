@@ -1,6 +1,7 @@
 package ir.proglovving.fitapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.data_models.CategoryItem;
+import ir.proglovving.fitapp.viesws.PlanItemsActivity;
 
 public class CategoryItemsRecyclerAdapter extends RecyclerView.Adapter<CategoryItemsRecyclerAdapter.CategoryItemViewHolder> {
     private Context context;
@@ -40,7 +42,9 @@ public class CategoryItemsRecyclerAdapter extends RecyclerView.Adapter<CategoryI
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, categoryItemList.get(position).getName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, PlanItemsActivity.class);
+                intent.putExtra(PlanItemsActivity.INTENT_KEY_CATEGORY_ID,categoryItemList.get(position).getId());
+                context.startActivity(intent);
             }
         });
     }

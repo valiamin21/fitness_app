@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initViews();
 
-        ApiService apiService = RetrofitClient.getInstance().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getApiService();
         final Call<CategoriesPack> categoriesPackCall = apiService.getCategories();
         categoriesPackCall.enqueue(new Callback<CategoriesPack>() {
             @Override

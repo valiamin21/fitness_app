@@ -1,4 +1,4 @@
-package ir.proglovving.fitapp;
+package ir.proglovving.fitapp.viesws;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.android.material.appbar.AppBarLayout;
 
 import ir.proglovving.cfviews.CTypefaceProvider;
+import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.adapters.CategoryItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;

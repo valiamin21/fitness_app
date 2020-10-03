@@ -70,7 +70,12 @@ public class MainActivity extends AppCompatActivity {
         categoryItemListRecyclerView = findViewById(R.id.category_item_list_recycler_view);
         appBarLayout = findViewById(R.id.appbarLayout);
         appBarLayout.setVisibility(View.INVISIBLE);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        CTypefaceProvider.applyFontForAViewGroup(toolbar,CTypefaceProvider.getVazir(this));
+        final Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                CTypefaceProvider.applyFontForAViewGroup(toolbar,CTypefaceProvider.getVazir(MainActivity.this));
+            }
+        },10);
     }
 }

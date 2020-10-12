@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/standard_margin_x2">
+
+    <ir.proglovving.cfviews.CfTextView
+        android:id="@+id/progress_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/standard_font_size_very_large"
+        tools:text="25%"
+        android:textStyle="bold"/>
+
+    <ir.proglovving.cfviews.CfTextView
+        android:id="@+id/title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:text="روز ۵"
+        android:textAlignment="center"
+        android:textSize="@dimen/standard_font_size_very_large"
+        android:textStyle="bold"/>
+
+</LinearLayout>

@@ -18,6 +18,7 @@ import java.util.List;
 
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.data_models.PlanItem;
+import ir.proglovving.fitapp.viesws.DayItemsActivity;
 import ir.proglovving.fitapp.viesws.PlanItemsActivity;
 
 public class PlanItemsRecyclerAdapter extends RecyclerView.Adapter<PlanItemsRecyclerAdapter.PlanItemViewHolder> {
@@ -44,6 +45,7 @@ public class PlanItemsRecyclerAdapter extends RecyclerView.Adapter<PlanItemsRecy
             public void onClick(View v) {
                 // TODO: 10/3/20
                 Toast.makeText(context, "" + planItemList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+                DayItemsActivity.start(context, planItemList.get(position).getId());
             }
         });
     }

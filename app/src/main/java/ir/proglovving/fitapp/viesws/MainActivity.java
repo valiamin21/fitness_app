@@ -13,8 +13,6 @@ import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -26,9 +24,6 @@ import ir.proglovving.fitapp.adapters.CategoryItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;
 import ir.proglovving.fitapp.data_models.CategoriesPack;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 

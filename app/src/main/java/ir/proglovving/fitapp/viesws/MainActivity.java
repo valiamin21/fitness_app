@@ -13,6 +13,13 @@ import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import ir.proglovving.cfviews.CTypefaceProvider;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.adapters.CategoryItemsRecyclerAdapter;
@@ -30,38 +37,41 @@ public class MainActivity extends AppCompatActivity {
     private ConstraintLayout splashContainer;
     private TextView motivationSentenceTextView;
     private RecyclerView categoryItemListRecyclerView;
+    CategoryItemsRecyclerAdapter categoryItemsRecyclerAdapter;
     private AppBarLayout appBarLayout;
+
+    private Disposable disposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
 
         ApiService apiService = RetrofitClient.getApiService();
-        final Call<CategoriesPack> categoriesPackCall = apiService.getCategories();
-        categoriesPackCall.enqueue(new Callback<CategoriesPack>() {
-            @Override
-            public void onResponse(Call<CategoriesPack> call, Response<CategoriesPack> response) {
-                if(!response.isSuccessful()){
-                    Toast.makeText(MainActivity.this, "error code : " + response.code(), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                appBarLayout.setVisibility(View.VISIBLE);
-                splashContainer.setVisibility(View.GONE);
-                CategoriesPack categoriesPack = response.body();
-                CategoryItemsRecyclerAdapter categoryItemsRecyclerAdapter = new CategoryItemsRecyclerAdapter(MainActivity.this,categoriesPack.getCategoryItemList());
-                categoryItemListRecyclerView.setAdapter(categoryItemsRecyclerAdapter);
+        final Single<CategoriesPack> categoriesPackCall = apiService.getCategories();
+        categoriesPackCall.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<CategoriesPack>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        disposable = d;
+                    }
 
-            }
+                    @Override
+                    public void onSuccess(CategoriesPack categoriesPack) {
+                        appBarLayout.setVisibility(View.VISIBLE);
+                        splashContainer.setVisibility(View.GONE);
+                        categoryItemsRecyclerAdapter = new CategoryItemsRecyclerAdapter(MainActivity.this, categoriesPack.getCategoryItemList());
+                        categoryItemListRecyclerView.setAdapter(categoryItemsRecyclerAdapter);
+                    }
 
-            @Override
-            public void onFailure(Call<CategoriesPack> call, Throwable t) {
-                // TODO: 9/30/20
-                Toast.makeText(MainActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(MainActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void initViews() {
@@ -74,8 +84,9 @@ public class MainActivity extends AppCompatActivity {
         toolbar.postDelayed(new Runnable() {
             @Override
             public void run() {
-                CTypefaceProvider.applyFontForAViewGroup(toolbar,CTypefaceProvider.getVazir(MainActivity.this));
+                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(MainActivity.this));
             }
-        },10);
+        }, 10);
+
     }
 }

@@ -1,5 +1,7 @@
 package ir.proglovving.fitapp.api;
 
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import ir.proglovving.fitapp.data_models.CategoriesPack;
 import ir.proglovving.fitapp.data_models.Category;
 import retrofit2.Call;
@@ -8,8 +10,8 @@ import retrofit2.http.Path;
 
 public interface ApiService {
     @GET("categories")
-    Call<CategoriesPack> getCategories();
+    Single<CategoriesPack> getCategories();
 
     @GET("category/{id}")
-    Call<Category> getCategory(@Path("id") int categoryId);
+    Single<Category> getCategory(@Path("id") int categoryId);
 }

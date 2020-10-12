@@ -9,6 +9,11 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import ir.proglovving.cfviews.CTypefaceProvider;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.adapters.PlanItemsRecyclerAdapter;
@@ -28,6 +33,8 @@ public class PlanItemsActivity extends AppCompatActivity {
     private RecyclerView planItemsRecyclerView;
     private ProgressBar progressBar;
 
+    private Disposable disposable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,26 +44,30 @@ public class PlanItemsActivity extends AppCompatActivity {
         toolbar.setTitle(getIntent().getStringExtra(INTENT_KEY_CATEGORY_NAME));
 
         ApiService apiService = RetrofitClient.getApiService();
-        Call<Category> categoryCall = apiService.getCategory(getIntent().getIntExtra(INTENT_KEY_CATEGORY_ID,-1));
-        categoryCall.enqueue(new Callback<Category>() {
-            @Override
-            public void onResponse(Call<Category> call, Response<Category> response) {
-                progressBar.setVisibility(View.GONE);
-                if(!response.isSuccessful()){
-                    Toast.makeText(PlanItemsActivity.this, "error code: " + response.code(), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                PlanItemsRecyclerAdapter planItemsRecyclerAdapter = new PlanItemsRecyclerAdapter(PlanItemsActivity.this,response.body().getPlanItemList());
-                planItemsRecyclerView.setAdapter(planItemsRecyclerAdapter);
-            }
+        Single<Category> categoryCall = apiService.getCategory(getIntent().getIntExtra(INTENT_KEY_CATEGORY_ID,-1));
 
-            @Override
-            public void onFailure(Call<Category> call, Throwable t) {
-                progressBar.setVisibility(View.GONE);
-                // TODO: 10/3/20
-                Toast.makeText(PlanItemsActivity.this, "failed to load category!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        categoryCall.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Category>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        disposable = d;
+                    }
+
+                    @Override
+                    public void onSuccess(Category category) {
+                        progressBar.setVisibility(View.GONE);
+                        PlanItemsRecyclerAdapter planItemsRecyclerAdapter = new PlanItemsRecyclerAdapter(PlanItemsActivity.this,category.getPlanItemList());
+                        planItemsRecyclerView.setAdapter(planItemsRecyclerAdapter);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        progressBar.setVisibility(View.GONE);
+                        // TODO: 10/3/20
+                        Toast.makeText(PlanItemsActivity.this, "failed to load category!", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
     }
 

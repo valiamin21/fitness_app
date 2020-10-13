@@ -1,25 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:padding="@dimen/standard_margin_x2">
+    android:layout_marginLeft="@dimen/standard_margin_x2"
+    android:layout_marginTop="@dimen/standard_margin"
+    android:layout_marginRight="@dimen/standard_margin_x2"
+    android:layout_marginBottom="@dimen/standard_margin"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:layoutDirection="rtl"
+    app:cardCornerRadius="@dimen/app_radius"
+    app:cardElevation="@dimen/app_cards_elevation"
+    app:contentPadding="@dimen/standard_margin_x2">
 
-    <ir.proglovving.cfviews.CfTextView
-        android:id="@+id/progress_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:textSize="@dimen/standard_font_size_very_large"
-        tools:text="25%"
-        android:textStyle="bold"/>
-
-    <ir.proglovving.cfviews.CfTextView
-        android:id="@+id/title_tv"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:text="روز ۵"
-        android:textAlignment="center"
-        android:textSize="@dimen/standard_font_size_very_large"
-        android:textStyle="bold"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-</LinearLayout>
+        <ir.proglovving.cfviews.CfTextView
+            android:id="@+id/progress_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="@dimen/standard_margin"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/standard_font_size_very_large"
+            android:textStyle="bold"
+            tools:text="25%" />
+
+        <ir.proglovving.cfviews.CfTextView
+            android:id="@+id/title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/standard_font_size_very_large"
+            android:textStyle="bold"
+            tools:text="روز ۵" />
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ir.proglovving.fitapp.R;
@@ -17,11 +18,10 @@ import ir.proglovving.fitapp.data_models.Day;
 public class DayItemsRecyclerAdapter extends RecyclerView.Adapter<DayItemsRecyclerAdapter.DayItemViewHolder> {
 
     private Context context;
-    private List<Day> dayList;
+    private List<Day> dayList = new ArrayList<>();
 
-    public DayItemsRecyclerAdapter(Context context, List<Day> dayList){
+    public DayItemsRecyclerAdapter(Context context){
         this.context = context;
-        this.dayList = dayList;
     }
 
     @NonNull
@@ -32,13 +32,24 @@ public class DayItemsRecyclerAdapter extends RecyclerView.Adapter<DayItemsRecycl
 
     @Override
     public void onBindViewHolder(@NonNull DayItemViewHolder holder, int position) {
-        holder.progressTextView.setText(String.valueOf(dayList.get(position).getDonePercent()));
+        holder.progressTextView.setText(String.valueOf(dayList.get(position).getId())); // todo put done exercises percent instead of id
         holder.titleTextView.setText(dayList.get(position).getTitle());
     }
 
     @Override
     public int getItemCount() {
         return dayList.size();
+    }
+
+    public void addItem(Day day){
+        dayList.add(day);
+        notifyItemInserted(dayList.size());
+//        notifyDataSetChanged();
+    }
+
+    public void clearItems(){
+        dayList.clear();
+        notifyDataSetChanged();
     }
 
     public class DayItemViewHolder extends RecyclerView.ViewHolder {

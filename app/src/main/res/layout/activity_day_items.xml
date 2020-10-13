@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".viesws.DayItemsActivity"
-    android:layoutDirection="rtl">
+    android:layoutDirection="rtl"
+    tools:context=".viesws.DayItemsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="enterAlways|scroll"/>
+            app:layout_scrollFlags="enterAlways|scroll" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -24,6 +24,8 @@
         android:id="@+id/day_items_list_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

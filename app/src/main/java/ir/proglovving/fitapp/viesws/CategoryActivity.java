@@ -20,11 +20,8 @@ import ir.proglovving.fitapp.adapters.PlanItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;
 import ir.proglovving.fitapp.data_models.Category;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class PlanItemsActivity extends AppCompatActivity {
+public class CategoryActivity extends AppCompatActivity {
 
     public static final String INTENT_KEY_CATEGORY_ID = "categoryId";
     public static final String INTENT_KEY_CATEGORY_NAME= "categoryName";
@@ -57,7 +54,7 @@ public class PlanItemsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Category category) {
                         progressBar.setVisibility(View.GONE);
-                        PlanItemsRecyclerAdapter planItemsRecyclerAdapter = new PlanItemsRecyclerAdapter(PlanItemsActivity.this,category.getPlanItemList());
+                        PlanItemsRecyclerAdapter planItemsRecyclerAdapter = new PlanItemsRecyclerAdapter(CategoryActivity.this,category.getPlanItemList());
                         planItemsRecyclerView.setAdapter(planItemsRecyclerAdapter);
                     }
 
@@ -65,7 +62,7 @@ public class PlanItemsActivity extends AppCompatActivity {
                     public void onError(Throwable e) {
                         progressBar.setVisibility(View.GONE);
                         // TODO: 10/3/20
-                        Toast.makeText(PlanItemsActivity.this, "failed to load category!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CategoryActivity.this, "failed to load category!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -79,7 +76,7 @@ public class PlanItemsActivity extends AppCompatActivity {
         toolbar.postDelayed(new Runnable() {
             @Override
             public void run() {
-                CTypefaceProvider.applyFontForAViewGroup(toolbar,CTypefaceProvider.getVazir(PlanItemsActivity.this));
+                CTypefaceProvider.applyFontForAViewGroup(toolbar,CTypefaceProvider.getVazir(CategoryActivity.this));
             }
         },10);
     }

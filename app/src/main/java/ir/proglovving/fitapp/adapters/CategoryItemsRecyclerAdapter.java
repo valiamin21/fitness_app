@@ -17,7 +17,7 @@ import java.util.List;
 
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.data_models.CategoryItem;
-import ir.proglovving.fitapp.viesws.PlanItemsActivity;
+import ir.proglovving.fitapp.viesws.CategoryActivity;
 
 public class CategoryItemsRecyclerAdapter extends RecyclerView.Adapter<CategoryItemsRecyclerAdapter.CategoryItemViewHolder> {
     private Context context;
@@ -41,9 +41,9 @@ public class CategoryItemsRecyclerAdapter extends RecyclerView.Adapter<CategoryI
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, PlanItemsActivity.class);
-                intent.putExtra(PlanItemsActivity.INTENT_KEY_CATEGORY_ID,categoryItemList.get(position).getId());
-                intent.putExtra(PlanItemsActivity.INTENT_KEY_CATEGORY_NAME,categoryItemList.get(position).getName());
+                Intent intent = new Intent(context, CategoryActivity.class);
+                intent.putExtra(CategoryActivity.INTENT_KEY_CATEGORY_ID,categoryItemList.get(position).getId());
+                intent.putExtra(CategoryActivity.INTENT_KEY_CATEGORY_NAME,categoryItemList.get(position).getName());
                 context.startActivity(intent);
             }
         });

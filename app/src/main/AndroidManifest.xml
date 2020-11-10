@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".viesws.DayItemsActivity"></activity>
-        <activity android:name=".viesws.PlanItemsActivity" />
-        <activity android:name=".viesws.MainActivity">
+        <activity android:name=".viesws.PlanActivity"></activity>
+        <activity android:name=".viesws.CategoryActivity" />
+        <activity android:name=".viesws.CategoriesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

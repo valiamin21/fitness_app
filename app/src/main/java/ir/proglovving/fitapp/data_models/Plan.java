@@ -59,15 +59,4 @@ public class Plan{
         this.restDays = restDays;
     }
 
-    public int[] getDaysIds() {
-        return daysIds;
-    }
-
-    public void setDaysIds(int[] daysIds) {
-        this.daysIds = daysIds;
-    }
-
-    @SerializedName("days_id")
-    private int[] daysIds;
-
 }

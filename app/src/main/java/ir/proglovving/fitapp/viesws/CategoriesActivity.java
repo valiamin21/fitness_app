@@ -25,7 +25,7 @@ import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;
 import ir.proglovving.fitapp.data_models.CategoriesPack;
 
-public class MainActivity extends AppCompatActivity {
+public class CategoriesActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
@@ -58,13 +58,13 @@ public class MainActivity extends AppCompatActivity {
                     public void onSuccess(CategoriesPack categoriesPack) {
                         appBarLayout.setVisibility(View.VISIBLE);
                         splashContainer.setVisibility(View.GONE);
-                        categoryItemsRecyclerAdapter = new CategoryItemsRecyclerAdapter(MainActivity.this, categoriesPack.getCategoryItemList());
+                        categoryItemsRecyclerAdapter = new CategoryItemsRecyclerAdapter(CategoriesActivity.this, categoriesPack.getCategoryItemList());
                         categoryItemListRecyclerView.setAdapter(categoryItemsRecyclerAdapter);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(MainActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CategoriesActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.postDelayed(new Runnable() {
             @Override
             public void run() {
-                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(MainActivity.this));
+                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(CategoriesActivity.this));
             }
         }, 10);
 

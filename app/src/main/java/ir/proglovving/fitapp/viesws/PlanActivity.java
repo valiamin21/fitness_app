@@ -28,6 +28,7 @@ import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;
 import ir.proglovving.fitapp.data_models.Day;
 import ir.proglovving.fitapp.data_models.Plan;
+import ir.proglovving.fitapp.data_models.PlanDays;
 
 public class PlanActivity extends AppCompatActivity {
 
@@ -35,7 +36,6 @@ public class PlanActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private RecyclerView dayItemsRecyclerView;
-    private DayItemsRecyclerAdapter dayItemsRecyclerAdapter;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -71,6 +71,27 @@ public class PlanActivity extends AppCompatActivity {
                         Toast.makeText(PlanActivity.this, "error", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+        Single<PlanDays> planDaysCall = apiService.getPlanDays(getIntent().getIntExtra(INTENT_KEY_PLAN_ID, -1));
+        planDaysCall.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<PlanDays>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        compositeDisposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(PlanDays planDays) {
+                        DayItemsRecyclerAdapter dayItemsRecyclerAdapter = new DayItemsRecyclerAdapter(PlanActivity.this,planDays.getDayItemList());
+                        dayItemsRecyclerView.setAdapter(dayItemsRecyclerAdapter);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(PlanActivity.this, "error in loading plan days", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override
@@ -88,7 +109,5 @@ public class PlanActivity extends AppCompatActivity {
             }
         }, 10);
         dayItemsRecyclerView = findViewById(R.id.day_items_list_recyclerView);
-        dayItemsRecyclerAdapter = new DayItemsRecyclerAdapter(this);
-        dayItemsRecyclerView.setAdapter(dayItemsRecyclerAdapter);
     }
 }

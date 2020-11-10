@@ -13,15 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.proglovving.fitapp.R;
-import ir.proglovving.fitapp.data_models.Day;
+import ir.proglovving.fitapp.data_models.DayItem;
 
 public class DayItemsRecyclerAdapter extends RecyclerView.Adapter<DayItemsRecyclerAdapter.DayItemViewHolder> {
 
     private Context context;
-    private List<Day> dayList = new ArrayList<>();
+    private List<DayItem> dayItemList;
 
-    public DayItemsRecyclerAdapter(Context context){
+    public DayItemsRecyclerAdapter(Context context, List<DayItem> dayItemList){
         this.context = context;
+        this.dayItemList = dayItemList;
     }
 
     @NonNull
@@ -32,24 +33,13 @@ public class DayItemsRecyclerAdapter extends RecyclerView.Adapter<DayItemsRecycl
 
     @Override
     public void onBindViewHolder(@NonNull DayItemViewHolder holder, int position) {
-        holder.progressTextView.setText(String.valueOf(dayList.get(position).getId())); // todo put done exercises percent instead of id
-        holder.titleTextView.setText(dayList.get(position).getTitle());
+        holder.progressTextView.setText(String.valueOf(dayItemList.get(position).getId())); // todo put done exercises percent instead of id
+        holder.titleTextView.setText(dayItemList.get(position).getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return dayList.size();
-    }
-
-    public void addItem(Day day){
-        dayList.add(day);
-        notifyItemInserted(dayList.size());
-//        notifyDataSetChanged();
-    }
-
-    public void clearItems(){
-        dayList.clear();
-        notifyDataSetChanged();
+        return dayItemList.size();
     }
 
     public class DayItemViewHolder extends RecyclerView.ViewHolder {

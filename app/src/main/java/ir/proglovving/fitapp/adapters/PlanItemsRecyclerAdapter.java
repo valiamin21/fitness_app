@@ -1,12 +1,12 @@
 package ir.proglovving.fitapp.adapters;
 
 import android.content.Context;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+import java.util.Random;
 
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.data_models.PlanItem;
@@ -23,7 +24,7 @@ public class PlanItemsRecyclerAdapter extends RecyclerView.Adapter<PlanItemsRecy
     private Context context;
     private List<PlanItem> planItemList;
 
-    public PlanItemsRecyclerAdapter(Context context, List<PlanItem> planItemList){
+    public PlanItemsRecyclerAdapter(Context context, List<PlanItem> planItemList) {
         this.context = context;
         this.planItemList = planItemList;
     }
@@ -36,14 +37,7 @@ public class PlanItemsRecyclerAdapter extends RecyclerView.Adapter<PlanItemsRecy
 
     @Override
     public void onBindViewHolder(@NonNull PlanItemViewHolder holder, final int position) {
-        holder.planItemTextView.setText(planItemList.get(position).getTitle());
-        Glide.with(context).load(planItemList.get(position).getImage()).into(holder.planItemImageView);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PlanActivity.start(context, planItemList.get(position).getId());
-            }
-        });
+        holder.setData(planItemList.get(position));
     }
 
     @Override
@@ -54,12 +48,30 @@ public class PlanItemsRecyclerAdapter extends RecyclerView.Adapter<PlanItemsRecy
     public class PlanItemViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView planItemImageView;
-        private TextView planItemTextView;
+        private TextView planItemTextView, totalDaysTextView, levelTextView, percentTextView;
 
         public PlanItemViewHolder(@NonNull View itemView) {
             super(itemView);
             planItemImageView = itemView.findViewById(R.id.plan_item_image);
             planItemTextView = itemView.findViewById(R.id.plan_item_title);
+            totalDaysTextView = itemView.findViewById(R.id.tv_totalDay);
+            levelTextView = itemView.findViewById(R.id.tv_level);
+            percentTextView = itemView.findViewById(R.id.tv_percent);
+        }
+
+        public void setData(final PlanItem planItem){
+            planItemTextView.setText(planItem.getTitle());
+            Glide.with(context).load(planItem.getImage()).into(planItemImageView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PlanActivity.start(context, planItem.getId());
+                }
+            });
+            totalDaysTextView.setText(planItem.getDaysCount() + " روزه");
+            levelTextView.setText("سطح " + planItem.getLevel());
+            // TODO: 11/11/20  set real percent to percentTextView
+            percentTextView.setText(new Random(SystemClock.currentThreadTimeMillis()).nextInt(20) * 5 + "%");
         }
     }
 }

@@ -68,6 +68,12 @@ public class CategoryActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disposable.dispose();
+    }
+
     private void initViews() {
         toolbar = findViewById(R.id.toolbar);
         planItemsRecyclerView = findViewById(R.id.plan_item_list_recycler_view);

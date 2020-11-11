@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_border_radius"
-            android:text="۳۰ روزه" />
+            tools:text="۳۰ روزه" />
 
         <ir.proglovving.cfviews.CfTextView
             android:id="@+id/tv_level"
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/standard_margin"
             android:background="@drawable/selector_border_radius"
-            android:text="متوسط" />
+            tools:text="متوسط" />
 
         <ir.proglovving.cfviews.CfTextView
             android:id="@+id/tv_percent"
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_circle_border"
-            android:text="25%" />
+            tools:text="25%" />
 
     </LinearLayout>
 

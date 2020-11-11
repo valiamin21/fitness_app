@@ -40,6 +40,7 @@
         android:layout_margin="@dimen/standard_margin">
 
         <ir.proglovving.cfviews.CfTextView
+            android:id="@+id/tv_totalDay"
             style="@style/TagTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,14 +48,16 @@
             android:text="۳۰ روزه" />
 
         <ir.proglovving.cfviews.CfTextView
+            android:id="@+id/tv_level"
             style="@style/TagTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/standard_margin"
             android:background="@drawable/selector_border_radius"
-            android:text="متوسط"
-            android:layout_marginHorizontal="@dimen/standard_margin"/>
+            android:text="متوسط" />
 
         <ir.proglovving.cfviews.CfTextView
+            android:id="@+id/tv_percent"
             style="@style/TagTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -41,8 +41,6 @@ public class PlanItemsRecyclerAdapter extends RecyclerView.Adapter<PlanItemsRecy
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 10/3/20
-                Toast.makeText(context, "" + planItemList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
                 PlanActivity.start(context, planItemList.get(position).getId());
             }
         });

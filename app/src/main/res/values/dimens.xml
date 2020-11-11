@@ -13,6 +13,7 @@
 
     <dimen name="app_radius">8dp</dimen>
     <dimen name="app_radius_x">16dp</dimen>
+    <dimen name="tag_text_radius">3dp</dimen>
 
     <dimen name="app_cards_elevation">5dp</dimen>
 </resources>

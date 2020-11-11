@@ -8,4 +8,11 @@
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:windowBackground">@color/windowBackgroundColor</item>
     </style>
+
+    <style name="TagTextStyle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/picturesTextColor</item>
+        <item name="android:textSize">@dimen/standard_font_size_large</item>
+        <item name="android:padding">@dimen/small_margin</item>
+    </style>
 </resources>

@@ -9,14 +9,14 @@ import ir.proglovving.fitapp.data_models.Category;
 import ir.proglovving.fitapp.data_models.Day;
 import ir.proglovving.fitapp.data_models.Plan;
 import ir.proglovving.fitapp.data_models.PlanDays;
-import ir.proglovving.fitapp.data_models.TipsRequestModel;
+import ir.proglovving.fitapp.data_models.Tip;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface ApiService {
 
     @GET("tips/")
-    Single<TipsRequestModel> getTips();
+    Single<List<Tip>> getTips();
 
     @GET("categories")
     Single<CategoriesPack> getCategories();

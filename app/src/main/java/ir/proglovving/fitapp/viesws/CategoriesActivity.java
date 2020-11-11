@@ -6,12 +6,16 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
+
+import java.util.List;
+import java.util.Random;
 
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
@@ -24,7 +28,7 @@ import ir.proglovving.fitapp.adapters.CategoryItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;
 import ir.proglovving.fitapp.data_models.CategoriesPack;
-import ir.proglovving.fitapp.data_models.TipsRequestModel;
+import ir.proglovving.fitapp.data_models.Tip;
 
 public class CategoriesActivity extends AppCompatActivity {
 
@@ -55,15 +59,15 @@ public class CategoriesActivity extends AppCompatActivity {
     private void loadTips() {
         apiService.getTips().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<TipsRequestModel>() {
+                .subscribe(new SingleObserver<List<Tip>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         tipsDisposable = d;
                     }
 
                     @Override
-                    public void onSuccess(TipsRequestModel tipsRequestModel) {
-                        motivationSentenceTextView.setText(tipsRequestModel.getTip().getText());
+                    public void onSuccess(List<Tip> tips) {
+                        motivationSentenceTextView.setText(tips.get(new Random(SystemClock.currentThreadTimeMillis()).nextInt(tips.size())).getText());
                         loadCategories();
                     }
 

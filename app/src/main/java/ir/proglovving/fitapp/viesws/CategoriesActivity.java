@@ -24,6 +24,7 @@ import ir.proglovving.fitapp.adapters.CategoryItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;
 import ir.proglovving.fitapp.data_models.CategoriesPack;
+import ir.proglovving.fitapp.data_models.TipsRequestModel;
 
 public class CategoriesActivity extends AppCompatActivity {
 
@@ -35,7 +36,9 @@ public class CategoriesActivity extends AppCompatActivity {
     CategoryItemsRecyclerAdapter categoryItemsRecyclerAdapter;
     private AppBarLayout appBarLayout;
 
-    private Disposable disposable;
+    private ApiService apiService;
+    private Disposable tipsDisposable;
+    private Disposable categoriesDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +47,53 @@ public class CategoriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initViews();
 
-        ApiService apiService = RetrofitClient.getApiService();
+        apiService = RetrofitClient.getApiService();
+
+        loadTips();
+    }
+
+    private void loadTips() {
+        apiService.getTips().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<TipsRequestModel>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        tipsDisposable = d;
+                    }
+
+                    @Override
+                    public void onSuccess(TipsRequestModel tipsRequestModel) {
+                        motivationSentenceTextView.setText(tipsRequestModel.getTip().getText());
+                        loadCategories();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(CategoriesActivity.this, "error in loading tips", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
+    private void loadCategories() {
         final Single<CategoriesPack> categoriesPackCall = apiService.getCategories();
         categoriesPackCall.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<CategoriesPack>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        disposable = d;
+                        categoriesDisposable = d;
                     }
 
                     @Override
                     public void onSuccess(CategoriesPack categoriesPack) {
+                        tipsDisposable.dispose();
+
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         appBarLayout.setVisibility(View.VISIBLE);
                         splashContainer.setVisibility(View.GONE);
                         categoryItemsRecyclerAdapter = new CategoryItemsRecyclerAdapter(CategoriesActivity.this, categoriesPack.getCategoryItemList());
@@ -67,6 +105,13 @@ public class CategoriesActivity extends AppCompatActivity {
                         Toast.makeText(CategoriesActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        categoriesDisposable.dispose();
+        tipsDisposable.dispose();
     }
 
     private void initViews() {

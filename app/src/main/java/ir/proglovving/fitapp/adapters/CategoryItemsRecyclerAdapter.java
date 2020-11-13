@@ -23,7 +23,7 @@ public class CategoryItemsRecyclerAdapter extends RecyclerView.Adapter<CategoryI
     private Context context;
     private List<CategoryItem> categoryItemList;
 
-    public CategoryItemsRecyclerAdapter(Context context, List<CategoryItem> categoryItemList){
+    public CategoryItemsRecyclerAdapter(Context context, List<CategoryItem> categoryItemList) {
         this.context = context;
         this.categoryItemList = categoryItemList;
     }
@@ -41,10 +41,7 @@ public class CategoryItemsRecyclerAdapter extends RecyclerView.Adapter<CategoryI
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, CategoryActivity.class);
-                intent.putExtra(CategoryActivity.INTENT_KEY_CATEGORY_ID,categoryItemList.get(position).getId());
-                intent.putExtra(CategoryActivity.INTENT_KEY_CATEGORY_NAME,categoryItemList.get(position).getName());
-                context.startActivity(intent);
+                CategoryActivity.start(context, categoryItemList.get(position).getId(), categoryItemList.get(position).getName());
             }
         });
     }

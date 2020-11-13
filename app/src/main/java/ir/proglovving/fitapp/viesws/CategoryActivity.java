@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -24,13 +26,20 @@ import ir.proglovving.fitapp.data_models.Category;
 public class CategoryActivity extends AppCompatActivity {
 
     public static final String INTENT_KEY_CATEGORY_ID = "categoryId";
-    public static final String INTENT_KEY_CATEGORY_NAME= "categoryName";
+    public static final String INTENT_KEY_CATEGORY_NAME = "categoryName";
 
     private Toolbar toolbar;
     private RecyclerView planItemsRecyclerView;
     private ProgressBar progressBar;
 
     private Disposable disposable;
+
+    public static void start(Context context, int categoryId, String categoryName) {
+        Intent intent = new Intent(context, CategoryActivity.class);
+        intent.putExtra(CategoryActivity.INTENT_KEY_CATEGORY_ID, categoryId);
+        intent.putExtra(CategoryActivity.INTENT_KEY_CATEGORY_NAME, categoryName);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +50,7 @@ public class CategoryActivity extends AppCompatActivity {
         toolbar.setTitle(getIntent().getStringExtra(INTENT_KEY_CATEGORY_NAME));
 
         ApiService apiService = RetrofitClient.getApiService();
-        Single<Category> categoryCall = apiService.getCategory(getIntent().getIntExtra(INTENT_KEY_CATEGORY_ID,-1));
+        Single<Category> categoryCall = apiService.getCategory(getIntent().getIntExtra(INTENT_KEY_CATEGORY_ID, -1));
 
         categoryCall.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -54,7 +63,7 @@ public class CategoryActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Category category) {
                         progressBar.setVisibility(View.GONE);
-                        PlanItemsRecyclerAdapter planItemsRecyclerAdapter = new PlanItemsRecyclerAdapter(CategoryActivity.this,category.getPlanItemList());
+                        PlanItemsRecyclerAdapter planItemsRecyclerAdapter = new PlanItemsRecyclerAdapter(CategoryActivity.this, category.getPlanItemList());
                         planItemsRecyclerView.setAdapter(planItemsRecyclerAdapter);
                     }
 
@@ -82,8 +91,8 @@ public class CategoryActivity extends AppCompatActivity {
         toolbar.postDelayed(new Runnable() {
             @Override
             public void run() {
-                CTypefaceProvider.applyFontForAViewGroup(toolbar,CTypefaceProvider.getVazir(CategoryActivity.this));
+                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(CategoryActivity.this));
             }
-        },10);
+        }, 10);
     }
 }

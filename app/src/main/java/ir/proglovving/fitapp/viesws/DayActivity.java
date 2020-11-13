@@ -1,6 +1,8 @@
 package ir.proglovving.fitapp.viesws;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +30,8 @@ public class DayActivity extends AppCompatActivity {
     public static final String INTENT_KEY_DAY_MUSCLES = "dayMuscles";
 
 
+    private Toolbar toolbar;
+    private RecyclerView exercisesRecyclerView;
     private Disposable disposable;
 
     public static void start(Context context, Day day) {
@@ -43,8 +47,15 @@ public class DayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
 
+        initViews();
+
+        int dayId = getIntent().getIntExtra(INTENT_KEY_DAY_ID, -1);
+        String dayTitle = getIntent().getStringExtra(INTENT_KEY_DAY_TITLE);
+
+        toolbar.setTitle(dayTitle);
+
         ApiService apiService = RetrofitClient.getApiService();
-        apiService.getDayExercises(getIntent().getIntExtra(INTENT_KEY_DAY_ID, -1))
+        apiService.getDayExercises(dayId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<DayExercises>() {
@@ -64,5 +75,16 @@ public class DayActivity extends AppCompatActivity {
                         Toast.makeText(DayActivity.this, "error in loading day exercises", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void initViews() {
+        toolbar = findViewById(R.id.toolbar);
+        exercisesRecyclerView = findViewById(R.id.exercise_items_list_recyclerView);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disposable.dispose();
     }
 }

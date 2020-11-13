@@ -7,8 +7,6 @@ public class Day {
     @SerializedName("name")
     private String title;
     private String muscle;
-    @SerializedName("exercise_id")
-    private int[] exercisesIds;
 
     public int getId() {
         return id;
@@ -32,13 +30,5 @@ public class Day {
 
     public String getMuscle() {
         return muscle;
-    }
-
-    public void setExercisesIds(int[] exercisesIds) {
-        this.exercisesIds = exercisesIds;
-    }
-
-    public int[] getExercisesIds() {
-        return exercisesIds;
     }
 }

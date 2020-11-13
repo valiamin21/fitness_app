@@ -7,6 +7,8 @@ import io.reactivex.Single;
 import ir.proglovving.fitapp.data_models.CategoriesPack;
 import ir.proglovving.fitapp.data_models.Category;
 import ir.proglovving.fitapp.data_models.Day;
+import ir.proglovving.fitapp.data_models.DayExercises;
+import ir.proglovving.fitapp.data_models.Exercise;
 import ir.proglovving.fitapp.data_models.Plan;
 import ir.proglovving.fitapp.data_models.PlanDays;
 import ir.proglovving.fitapp.data_models.Tip;
@@ -31,5 +33,8 @@ public interface ApiService {
     Single<PlanDays> getPlanDays(@Path("id") int planId);
 
     @GET("day/{id}")
-    Observable<Day> getDay(@Path("id") int dayId);
+    Single<Day> getDay(@Path("id") int dayId);
+
+    @GET("day_exercises/{id}")
+    Single<DayExercises> getDayExercises(@Path("id") int dayId);
 }

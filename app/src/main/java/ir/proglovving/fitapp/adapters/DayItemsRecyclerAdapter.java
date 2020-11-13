@@ -9,18 +9,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ir.proglovving.fitapp.R;
-import ir.proglovving.fitapp.data_models.DayItem;
+import ir.proglovving.fitapp.data_models.Day;
+import ir.proglovving.fitapp.viesws.DayActivity;
 
 public class DayItemsRecyclerAdapter extends RecyclerView.Adapter<DayItemsRecyclerAdapter.DayItemViewHolder> {
 
     private Context context;
-    private List<DayItem> dayItemList;
+    private List<Day> dayItemList;
 
-    public DayItemsRecyclerAdapter(Context context, List<DayItem> dayItemList){
+    public DayItemsRecyclerAdapter(Context context, List<Day> dayItemList) {
         this.context = context;
         this.dayItemList = dayItemList;
     }
@@ -28,13 +28,19 @@ public class DayItemsRecyclerAdapter extends RecyclerView.Adapter<DayItemsRecycl
     @NonNull
     @Override
     public DayItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new DayItemViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_day_item,parent,false));
+        return new DayItemViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_day_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DayItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DayItemViewHolder holder, final int position) {
         holder.progressTextView.setText(String.valueOf(dayItemList.get(position).getId())); // todo put done exercises percent instead of id
         holder.titleTextView.setText(dayItemList.get(position).getTitle());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DayActivity.start(context, dayItemList.get(position));
+            }
+        });
     }
 
     @Override

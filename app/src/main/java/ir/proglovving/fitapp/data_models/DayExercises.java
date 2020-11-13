@@ -1,15 +1,12 @@
 package ir.proglovving.fitapp.data_models;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
-public class PlanDays {
+public class DayExercises {
     private int count;
     private int next;
     private int previous;
-    @SerializedName("results")
-    private List<Day> dayItemList;
+    private List<Exercise> exerciseList;
 
     public int getCount() {
         return count;
@@ -35,11 +32,11 @@ public class PlanDays {
         this.previous = previous;
     }
 
-    public List<Day> getDayItemList() {
-        return dayItemList;
+    public List<Exercise> getExerciseList() {
+        return exerciseList;
     }
 
-    public void setDayItemList(List<Day> dayItemList) {
-        this.dayItemList = dayItemList;
+    public void setExerciseList(List<Exercise> exerciseList) {
+        this.exerciseList = exerciseList;
     }
 }

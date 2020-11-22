@@ -1,11 +1,14 @@
 package ir.proglovving.fitapp.data_models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class DayExercises {
     private int count;
     private int next;
     private int previous;
+    @SerializedName("results")
     private List<Exercise> exerciseList;
 
     public int getCount() {

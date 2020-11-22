@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/standard_margin_x2"
+    android:layout_marginTop="@dimen/standard_margin_x2"
+    android:layout_marginRight="@dimen/standard_margin_x2"
+    android:layout_marginBottom="@dimen/standard_margin"
+    android:clickable="true"
+    app:cardCornerRadius="@dimen/app_radius"
+    app:cardElevation="@dimen/app_cards_elevation">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ir.proglovving.cfviews.CfTextView
+            android:id="@+id/tv_exerciseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/standard_margin_x3"
+            android:layout_marginBottom="@dimen/standard_margin"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/standard_font_size_very_large"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_exerciseTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="نام ورزش" />
+
+        <ir.proglovving.cfviews.CfTextView
+            android:id="@+id/tv_exerciseTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/standard_font_size_large"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_exerciseName"
+            app:layout_constraintTop_toBottomOf="@+id/tv_exerciseName"
+            tools:text="00:30" />
+
+        <ImageView
+            android:id="@+id/exercise_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <!--        todo changing check icon-->
+        <ImageView
+            android:id="@+id/image_doneCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/checkbox_on_background" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

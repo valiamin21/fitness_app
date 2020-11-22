@@ -17,6 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ir.proglovving.fitapp.R;
+import ir.proglovving.fitapp.adapters.ExerciseItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;
 import ir.proglovving.fitapp.data_models.Day;
@@ -32,6 +33,7 @@ public class DayActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private RecyclerView exercisesRecyclerView;
+    private ExerciseItemsRecyclerAdapter exerciseItemsRecyclerAdapter;
     private Disposable disposable;
 
     public static void start(Context context, Day day) {
@@ -66,8 +68,8 @@ public class DayActivity extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(DayExercises dayExercises) {
-                        List<Exercise> exerciseList = dayExercises.getExerciseList();
-                        Toast.makeText(DayActivity.this, "successfully received " + dayExercises.getCount(), Toast.LENGTH_SHORT).show();
+                        exerciseItemsRecyclerAdapter = new ExerciseItemsRecyclerAdapter(DayActivity.this, dayExercises.getExerciseList());
+                        exercisesRecyclerView.setAdapter(exerciseItemsRecyclerAdapter);
                     }
 
                     @Override

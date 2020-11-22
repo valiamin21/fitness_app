@@ -10,14 +10,15 @@
     android:layout_marginBottom="@dimen/standard_margin"
     android:clickable="true"
     app:cardCornerRadius="@dimen/app_radius"
-    app:cardElevation="@dimen/app_cards_elevation">
+    app:cardElevation="@dimen/app_cards_elevation"
+    android:layoutDirection="rtl">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ir.proglovving.cfviews.CfTextView
-            android:id="@+id/tv_exerciseName"
+            android:id="@+id/tv_exerciseTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/standard_margin_x3"
@@ -26,7 +27,7 @@
             android:textSize="@dimen/standard_font_size_very_large"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tv_exerciseTime"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="نام ورزش" />
@@ -39,9 +40,10 @@
             android:textSize="@dimen/standard_font_size_large"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tv_exerciseName"
-            app:layout_constraintTop_toBottomOf="@+id/tv_exerciseName"
-            tools:text="00:30" />
+            app:layout_constraintRight_toRightOf="@+id/tv_exerciseTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tv_exerciseTitle"
+            tools:text="00:30"
+            android:layout_marginRight="@dimen/standard_margin"/>
 
         <ImageView
             android:id="@+id/exercise_image"
@@ -49,16 +51,17 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:maxHeight="100dp"/>
 
         <!--        todo changing check icon-->
         <ImageView
             android:id="@+id/image_doneCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/checkbox_on_background" />
     </androidx.constraintlayout.widget.ConstraintLayout>

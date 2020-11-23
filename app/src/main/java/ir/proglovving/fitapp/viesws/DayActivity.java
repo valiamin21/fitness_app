@@ -16,6 +16,7 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import ir.proglovving.cfviews.CTypefaceProvider;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.adapters.ExerciseItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
@@ -81,6 +82,12 @@ public class DayActivity extends AppCompatActivity {
 
     private void initViews() {
         toolbar = findViewById(R.id.toolbar);
+        toolbar.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(DayActivity.this));
+            }
+        }, 10);
         exercisesRecyclerView = findViewById(R.id.exercise_items_list_recyclerView);
     }
 

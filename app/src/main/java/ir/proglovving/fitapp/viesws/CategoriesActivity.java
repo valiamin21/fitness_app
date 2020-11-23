@@ -1,18 +1,23 @@
 package ir.proglovving.fitapp.viesws;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 import java.util.Random;
@@ -37,8 +42,9 @@ public class CategoriesActivity extends AppCompatActivity {
     private ConstraintLayout splashContainer;
     private TextView motivationSentenceTextView;
     private RecyclerView categoryItemListRecyclerView;
-    CategoryItemsRecyclerAdapter categoryItemsRecyclerAdapter;
+    private CategoryItemsRecyclerAdapter categoryItemsRecyclerAdapter;
     private AppBarLayout appBarLayout;
+    private NavigationView navigationView;
 
     private ApiService apiService;
     private Disposable tipsDisposable;
@@ -132,5 +138,20 @@ public class CategoriesActivity extends AppCompatActivity {
             }
         }, 10);
 
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+        ActionBarDrawerToggle drawerToggle =
+                new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
+        navigationView = findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Toast.makeText(CategoriesActivity.this, "clicked " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
     }
 }

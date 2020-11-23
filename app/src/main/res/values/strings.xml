@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">فیت اپ</string>
+
+    <string name="settings">تنظیمات</string>
+    <string name="faq">سوالات پرتکرار</string>
+    <string name="about_us">درباره ما</string>
+    <string name="rate_in_bazar">نظر در کافه‌بازار</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
 </resources>

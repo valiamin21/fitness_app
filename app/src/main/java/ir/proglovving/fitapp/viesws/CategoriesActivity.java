@@ -52,7 +52,7 @@ public class CategoriesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        enterFullScreenMode();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
@@ -97,6 +97,7 @@ public class CategoriesActivity extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(CategoriesPack categoriesPack) {
+                        exitFullScreenMode();
                         tipsDisposable.dispose();
 
                         try {
@@ -153,5 +154,14 @@ public class CategoriesActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void enterFullScreenMode() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    private void exitFullScreenMode() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
     }
 }

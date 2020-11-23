@@ -9,24 +9,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
-import io.reactivex.Observer;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import ir.proglovving.cfviews.CTypefaceProvider;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.adapters.DayItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;
-import ir.proglovving.fitapp.data_models.Day;
 import ir.proglovving.fitapp.data_models.Plan;
 import ir.proglovving.fitapp.data_models.PlanDays;
 
@@ -48,7 +41,7 @@ public class PlanActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_day_items);
+        setContentView(R.layout.activity_plan);
         initViews();
 
         ApiService apiService = RetrofitClient.getApiService();

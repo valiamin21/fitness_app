@@ -54,7 +54,7 @@ public class CategoriesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         enterFullScreenMode();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_categories);
         initViews();
 
         apiService = RetrofitClient.getApiService();

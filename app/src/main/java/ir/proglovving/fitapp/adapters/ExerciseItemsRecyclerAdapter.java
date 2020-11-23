@@ -21,17 +21,17 @@ public class ExerciseItemsRecyclerAdapter extends RecyclerView.Adapter<ExerciseI
 
     private Context context;
     private List<Exercise> exerciseList;
-    
-    public ExerciseItemsRecyclerAdapter(Context context, List<Exercise> exerciseList){
+
+    public ExerciseItemsRecyclerAdapter(Context context, List<Exercise> exerciseList) {
         this.context = context;
         this.exerciseList = exerciseList;
     }
-    
+
     @NonNull
     @Override
     public ExerciseItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ExerciseItemViewHolder(
-                LayoutInflater.from(context).inflate(R.layout.layout_exercise_item,parent,false)
+                LayoutInflater.from(context).inflate(R.layout.layout_exercise_item, parent, false)
         );
     }
 
@@ -45,7 +45,7 @@ public class ExerciseItemsRecyclerAdapter extends RecyclerView.Adapter<ExerciseI
         return exerciseList.size();
     }
 
-    public class ExerciseItemViewHolder extends RecyclerView.ViewHolder{
+    public class ExerciseItemViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView exerciseImage, doneCheckImage;
         private TextView exerciseTitleTextView, exerciseTimeTextView;
@@ -57,11 +57,15 @@ public class ExerciseItemsRecyclerAdapter extends RecyclerView.Adapter<ExerciseI
             exerciseTitleTextView = itemView.findViewById(R.id.tv_exerciseTitle);
             exerciseTimeTextView = itemView.findViewById(R.id.tv_exerciseTime);
         }
-        
-        public void setData(Exercise exercise){
+
+        public void setData(Exercise exercise) {
             Glide.with(context).load(exercise.getGif()).into(exerciseImage);
             exerciseTitleTextView.setText(exercise.getTitle());
-            exerciseTimeTextView.setText(exercise.getTime() / 60 + ":" + exercise.getTime() % 60);
+
+            // TODO: 11/23/20 applying isTimed variable to time TextView
+            exerciseTimeTextView.setText(String.format("%02d", exercise.getTime() / 60));
+            exerciseTimeTextView.append(":");
+            exerciseTimeTextView.append(String.format("%02d", exercise.getTime() % 60));
         }
     }
 }

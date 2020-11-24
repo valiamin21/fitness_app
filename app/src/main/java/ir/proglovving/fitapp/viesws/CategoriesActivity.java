@@ -29,6 +29,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ir.proglovving.cfviews.CTypefaceProvider;
 import ir.proglovving.fitapp.R;
+import ir.proglovving.fitapp.Utilities;
 import ir.proglovving.fitapp.adapters.CategoryItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;
@@ -147,6 +148,12 @@ public class CategoriesActivity extends AppCompatActivity {
         drawerToggle.syncState();
 
         navigationView = findViewById(R.id.navigation_view);
+        navigationView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Utilities.applyFontForNavigationView(CategoriesActivity.this, navigationView);
+            }
+        }, 10);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

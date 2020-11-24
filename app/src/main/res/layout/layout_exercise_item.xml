@@ -60,11 +60,12 @@
         <!--        todo changing check icon-->
         <ImageView
             android:id="@+id/image_doneCheck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/exercise_checked_icon_size"
+            android:layout_height="@dimen/exercise_checked_icon_size"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/checkbox_on_background" />
+            android:src="@drawable/green_checked"
+            app:tint="@color/colorPrimary" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

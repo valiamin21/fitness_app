@@ -16,4 +16,6 @@
     <dimen name="tag_text_radius">3dp</dimen>
 
     <dimen name="app_cards_elevation">5dp</dimen>
+
+    <dimen name="exercise_checked_icon_size">32dp</dimen>
 </resources>

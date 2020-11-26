@@ -77,8 +77,18 @@ public class CommonQuestionsActivity extends AppCompatActivity {
                 CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(CommonQuestionsActivity.this));
             }
         }, 10);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         faqRecyclerView = findViewById(R.id.faq_recyclerView);
+
     }
 
     @Override

@@ -1,6 +1,6 @@
 package ir.proglovving.fitapp.data_models;
 
-public class faqItem {
+public class FaqItem {
     private int id;
     private String question;
     private String answer;

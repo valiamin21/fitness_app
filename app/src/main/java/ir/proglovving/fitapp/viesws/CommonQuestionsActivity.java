@@ -10,12 +10,23 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
+import android.widget.Toast;
 
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import ir.proglovving.cfviews.CTypefaceProvider;
 import ir.proglovving.fitapp.R;
+import ir.proglovving.fitapp.adapters.FaqItemsRecyclerAdapter;
+import ir.proglovving.fitapp.api.ApiService;
+import ir.proglovving.fitapp.api.RetrofitClient;
+import ir.proglovving.fitapp.data_models.FaqItemsRequest;
 
 public class CommonQuestionsActivity extends AppCompatActivity {
 
@@ -26,11 +37,36 @@ public class CommonQuestionsActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private RecyclerView faqRecyclerView;
 
+    private Disposable disposable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_questions);
         initViews();
+
+        ApiService apiService = RetrofitClient.getApiService();
+        Single<FaqItemsRequest> faqItemsRequestSingle = apiService.getFaq();
+        faqItemsRequestSingle
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<FaqItemsRequest>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        disposable = d;
+                    }
+
+                    @Override
+                    public void onSuccess(FaqItemsRequest faqItemsRequest) {
+                        FaqItemsRecyclerAdapter faqItemsRecyclerAdapter = new FaqItemsRecyclerAdapter(CommonQuestionsActivity.this, faqItemsRequest.getFaqItemList());
+                        faqRecyclerView.setAdapter(faqItemsRecyclerAdapter);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(CommonQuestionsActivity.this, "error " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void initViews() {
@@ -43,5 +79,11 @@ public class CommonQuestionsActivity extends AppCompatActivity {
         }, 10);
 
         faqRecyclerView = findViewById(R.id.faq_recyclerView);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disposable.dispose();
     }
 }

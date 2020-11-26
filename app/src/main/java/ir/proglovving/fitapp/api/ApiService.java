@@ -9,6 +9,7 @@ import ir.proglovving.fitapp.data_models.Category;
 import ir.proglovving.fitapp.data_models.Day;
 import ir.proglovving.fitapp.data_models.DayExercises;
 import ir.proglovving.fitapp.data_models.Exercise;
+import ir.proglovving.fitapp.data_models.FaqItemsRequest;
 import ir.proglovving.fitapp.data_models.Plan;
 import ir.proglovving.fitapp.data_models.PlanDays;
 import ir.proglovving.fitapp.data_models.Tip;
@@ -37,4 +38,7 @@ public interface ApiService {
 
     @GET("day_exercises/{id}")
     Single<DayExercises> getDayExercises(@Path("id") int dayId);
+
+    @GET("faq")
+    Single<FaqItemsRequest> getFaq();
 }

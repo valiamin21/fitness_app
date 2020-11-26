@@ -78,7 +78,7 @@ public class FaqItemsRecyclerAdapter extends RecyclerView.Adapter<FaqItemsRecycl
                 }
             });
 
-            questionTextView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     expandToggle(faqItem, position);

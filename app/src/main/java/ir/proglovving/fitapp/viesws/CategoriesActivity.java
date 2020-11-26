@@ -157,7 +157,13 @@ public class CategoriesActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Toast.makeText(CategoriesActivity.this, "clicked " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                switch (item.getItemId()) {
+                    case R.id.faq:
+                        CommonQuestionsActivity.start(CategoriesActivity.this);
+                        break;
+                    default:
+                        Toast.makeText(CategoriesActivity.this, "clicked " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
         });

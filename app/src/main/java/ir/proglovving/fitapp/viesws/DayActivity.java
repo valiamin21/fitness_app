@@ -9,9 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import java.util.List;
-
-import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -22,8 +19,7 @@ import ir.proglovving.fitapp.adapters.ExerciseItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;
 import ir.proglovving.fitapp.data_models.Day;
-import ir.proglovving.fitapp.data_models.DayExercises;
-import ir.proglovving.fitapp.data_models.Exercise;
+import ir.proglovving.fitapp.data_models.DayExercisesRequest;
 
 public class DayActivity extends AppCompatActivity {
 
@@ -61,15 +57,15 @@ public class DayActivity extends AppCompatActivity {
         apiService.getDayExercises(dayId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<DayExercises>() {
+                .subscribe(new SingleObserver<DayExercisesRequest>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         disposable = d;
                     }
 
                     @Override
-                    public void onSuccess(DayExercises dayExercises) {
-                        exerciseItemsRecyclerAdapter = new ExerciseItemsRecyclerAdapter(DayActivity.this, dayExercises.getExerciseList());
+                    public void onSuccess(DayExercisesRequest dayExercisesRequest) {
+                        exerciseItemsRecyclerAdapter = new ExerciseItemsRecyclerAdapter(DayActivity.this, dayExercisesRequest.getExerciseList());
                         exercisesRecyclerView.setAdapter(exerciseItemsRecyclerAdapter);
                     }
 

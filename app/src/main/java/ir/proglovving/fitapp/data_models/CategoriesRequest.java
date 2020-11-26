@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class CategoriesPack {
+public class CategoriesRequest {
     private int count;
     @SerializedName("results")
     private List<CategoryItem> categoryItemList;

@@ -33,7 +33,7 @@ import ir.proglovving.fitapp.Utilities;
 import ir.proglovving.fitapp.adapters.CategoryItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;
-import ir.proglovving.fitapp.data_models.CategoriesPack;
+import ir.proglovving.fitapp.data_models.CategoriesRequest;
 import ir.proglovving.fitapp.data_models.Tip;
 
 public class CategoriesActivity extends AppCompatActivity {
@@ -87,17 +87,17 @@ public class CategoriesActivity extends AppCompatActivity {
     }
 
     private void loadCategories() {
-        final Single<CategoriesPack> categoriesPackCall = apiService.getCategories();
+        final Single<CategoriesRequest> categoriesPackCall = apiService.getCategories();
         categoriesPackCall.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<CategoriesPack>() {
+                .subscribe(new SingleObserver<CategoriesRequest>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         categoriesDisposable = d;
                     }
 
                     @Override
-                    public void onSuccess(CategoriesPack categoriesPack) {
+                    public void onSuccess(CategoriesRequest categoriesRequest) {
                         exitFullScreenMode();
                         tipsDisposable.dispose();
 
@@ -108,7 +108,7 @@ public class CategoriesActivity extends AppCompatActivity {
                         }
                         appBarLayout.setVisibility(View.VISIBLE);
                         splashContainer.setVisibility(View.GONE);
-                        categoryItemsRecyclerAdapter = new CategoryItemsRecyclerAdapter(CategoriesActivity.this, categoriesPack.getCategoryItemList());
+                        categoryItemsRecyclerAdapter = new CategoryItemsRecyclerAdapter(CategoriesActivity.this, categoriesRequest.getCategoryItemList());
                         categoryItemListRecyclerView.setAdapter(categoryItemsRecyclerAdapter);
                     }
 

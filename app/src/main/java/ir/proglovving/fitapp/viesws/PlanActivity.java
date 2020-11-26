@@ -21,7 +21,7 @@ import ir.proglovving.fitapp.adapters.DayItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;
 import ir.proglovving.fitapp.data_models.Plan;
-import ir.proglovving.fitapp.data_models.PlanDays;
+import ir.proglovving.fitapp.data_models.PlanDaysRequest;
 
 public class PlanActivity extends AppCompatActivity {
 
@@ -65,18 +65,18 @@ public class PlanActivity extends AppCompatActivity {
                     }
                 });
 
-        Single<PlanDays> planDaysCall = apiService.getPlanDays(getIntent().getIntExtra(INTENT_KEY_PLAN_ID, -1));
+        Single<PlanDaysRequest> planDaysCall = apiService.getPlanDays(getIntent().getIntExtra(INTENT_KEY_PLAN_ID, -1));
         planDaysCall.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<PlanDays>() {
+                .subscribe(new SingleObserver<PlanDaysRequest>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         compositeDisposable.add(d);
                     }
 
                     @Override
-                    public void onSuccess(PlanDays planDays) {
-                        DayItemsRecyclerAdapter dayItemsRecyclerAdapter = new DayItemsRecyclerAdapter(PlanActivity.this,planDays.getDayItemList());
+                    public void onSuccess(PlanDaysRequest planDaysRequest) {
+                        DayItemsRecyclerAdapter dayItemsRecyclerAdapter = new DayItemsRecyclerAdapter(PlanActivity.this, planDaysRequest.getDayItemList());
                         dayItemsRecyclerView.setAdapter(dayItemsRecyclerAdapter);
                     }
 

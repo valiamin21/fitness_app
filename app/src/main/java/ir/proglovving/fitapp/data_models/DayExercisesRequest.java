@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class DayExercises {
+public class DayExercisesRequest {
     private int count;
     private int next;
     private int previous;

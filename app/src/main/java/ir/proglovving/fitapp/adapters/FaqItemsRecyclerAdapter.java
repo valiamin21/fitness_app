@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +34,7 @@ public class FaqItemsRecyclerAdapter extends RecyclerView.Adapter<FaqItemsRecycl
 
     @Override
     public void onBindViewHolder(@NonNull FaqViewHolder holder, int position) {
-        holder.setData(faqItemList.get(position));
+        holder.setData(faqItemList.get(position), position);
     }
 
     @Override
@@ -53,9 +54,36 @@ public class FaqItemsRecyclerAdapter extends RecyclerView.Adapter<FaqItemsRecycl
             arrowButton = itemView.findViewById(R.id.arrow_imageButton);
         }
 
-        public void setData(FaqItem faqItem) {
+        void expandToggle(FaqItem faqItem, int position) {
+            faqItem.setExpanded(!faqItem.isExpanded());
+            notifyItemChanged(position);
+        }
+
+        public void setData(final FaqItem faqItem, final int position) {
             questionTextView.setText(faqItem.getQuestion());
             answerTextView.setText(faqItem.getAnswer());
+            if (faqItem.isExpanded()) {
+                answerTextView.setVisibility(View.VISIBLE);
+                arrowButton.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_24);
+            } else {
+                answerTextView.setVisibility(View.GONE);
+                arrowButton.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_24);
+            }
+
+
+            arrowButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    expandToggle(faqItem, position);
+                }
+            });
+
+            questionTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    expandToggle(faqItem, position);
+                }
+            });
         }
     }
 }

@@ -21,6 +21,18 @@
         android:orientation="horizontal">
 
         <ir.proglovving.cfviews.CfTextView
+            android:id="@+id/title_tv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/standard_font_size_very_large"
+            android:textStyle="bold"
+            tools:text="روز ۵" />
+
+        <ir.proglovving.cfviews.CfTextView
             android:id="@+id/progress_tv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -30,16 +42,6 @@
             android:textStyle="bold"
             tools:text="25%" />
 
-        <ir.proglovving.cfviews.CfTextView
-            android:id="@+id/title_tv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/standard_font_size_very_large"
-            android:textStyle="bold"
-            tools:text="روز ۵" />
     </LinearLayout>
 
 

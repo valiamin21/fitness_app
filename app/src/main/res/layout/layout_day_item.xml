@@ -40,7 +40,8 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/standard_font_size_very_large"
             android:textStyle="bold"
-            tools:text="25%" />
+            tools:text="25%"
+            android:background="@drawable/selector_circle_border_day_item_percent"/>
 
     </LinearLayout>
 

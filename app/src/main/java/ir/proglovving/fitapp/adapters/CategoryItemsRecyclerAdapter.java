@@ -1,7 +1,6 @@
 package ir.proglovving.fitapp.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,19 +12,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.data_models.CategoryItem;
 import ir.proglovving.fitapp.viesws.CategoryActivity;
 
 public class CategoryItemsRecyclerAdapter extends RecyclerView.Adapter<CategoryItemsRecyclerAdapter.CategoryItemViewHolder> {
     private Context context;
-    private List<CategoryItem> categoryItemList;
+    private Pagination pagination;
+    private List<CategoryItem> categoryItemList = new ArrayList<>();
+    private int maxPaginationBound = 0;
 
-    public CategoryItemsRecyclerAdapter(Context context, List<CategoryItem> categoryItemList) {
+    public CategoryItemsRecyclerAdapter(Context context, Pagination pagination) {
         this.context = context;
-        this.categoryItemList = categoryItemList;
+        this.pagination = pagination;
+    }
+
+    public void addItems(List<CategoryItem> categoryItemList) {
+        this.categoryItemList.addAll(categoryItemList);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -44,6 +52,14 @@ public class CategoryItemsRecyclerAdapter extends RecyclerView.Adapter<CategoryI
                 CategoryActivity.start(context, categoryItemList.get(position).getId(), categoryItemList.get(position).getName());
             }
         });
+
+        if (position == categoryItemList.size() - 1) {
+            if (maxPaginationBound < position) {
+                pagination.onNext();
+            } else {
+                maxPaginationBound = position;
+            }
+        }
     }
 
     @Override

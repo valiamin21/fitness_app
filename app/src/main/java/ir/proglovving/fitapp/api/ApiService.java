@@ -13,6 +13,7 @@ import ir.proglovving.fitapp.data_models.PlanDaysRequest;
 import ir.proglovving.fitapp.data_models.Tip;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Url;
 
 public interface ApiService {
 
@@ -21,6 +22,9 @@ public interface ApiService {
 
     @GET("categories")
     Single<CategoriesRequest> getCategories();
+
+    @GET
+    Single<CategoriesRequest> getCategories(@Url String url);
 
     @GET("category/{id}")
     Single<Category> getCategory(@Path("id") int categoryId);

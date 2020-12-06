@@ -13,6 +13,7 @@ import android.os.SystemClock;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,13 +22,16 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ir.proglovving.cfviews.CTypefaceProvider;
+import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.Utilities;
 import ir.proglovving.fitapp.adapters.CategoryItemsRecyclerAdapter;
@@ -46,10 +50,13 @@ public class CategoriesActivity extends AppCompatActivity {
     private CategoryItemsRecyclerAdapter categoryItemsRecyclerAdapter;
     private AppBarLayout appBarLayout;
     private NavigationView navigationView;
+    private ProgressBar paginationProgressBar;
 
     private ApiService apiService;
     private Disposable tipsDisposable;
-    private Disposable categoriesDisposable;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    private String nextPage = "initial";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +64,14 @@ public class CategoriesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
         initViews();
+
+        categoryItemsRecyclerAdapter = new CategoryItemsRecyclerAdapter(CategoriesActivity.this, new Pagination() {
+            @Override
+            public void onNext() {
+                loadCategories();
+            }
+        });
+        categoryItemListRecyclerView.setAdapter(categoryItemsRecyclerAdapter);
 
         apiService = RetrofitClient.getApiService();
 
@@ -80,20 +95,30 @@ public class CategoriesActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(CategoriesActivity.this, "error in loading tips", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CategoriesActivity.this, "error in loading tips " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
     }
 
     private void loadCategories() {
-        final Single<CategoriesRequest> categoriesPackCall = apiService.getCategories();
-        categoriesPackCall.subscribeOn(Schedulers.io())
+        if(nextPage == null)
+            return;
+
+        paginationProgressBar.setVisibility(View.VISIBLE);
+        final Single<CategoriesRequest> categoriesPackSingleObservable;
+        if (nextPage.equals("initial")) {
+            categoriesPackSingleObservable = apiService.getCategories();
+        }else{
+            categoriesPackSingleObservable = apiService.getCategories(nextPage);
+        }
+        categoriesPackSingleObservable.subscribeOn(Schedulers.io())
+                .delay(1, TimeUnit.SECONDS) // TODO: 12/6/20 remove this line later
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<CategoriesRequest>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        categoriesDisposable = d;
+                        compositeDisposable.add(d);
                     }
 
                     @Override
@@ -101,15 +126,11 @@ public class CategoriesActivity extends AppCompatActivity {
                         exitFullScreenMode();
                         tipsDisposable.dispose();
 
-                        try {
-                            Thread.sleep(500);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
                         appBarLayout.setVisibility(View.VISIBLE);
                         splashContainer.setVisibility(View.GONE);
-                        categoryItemsRecyclerAdapter = new CategoryItemsRecyclerAdapter(CategoriesActivity.this, categoriesRequest.getCategoryItemList());
-                        categoryItemListRecyclerView.setAdapter(categoryItemsRecyclerAdapter);
+                        paginationProgressBar.setVisibility(View.INVISIBLE);
+                        nextPage = categoriesRequest.getNext();
+                        categoryItemsRecyclerAdapter.addItems(categoriesRequest.getCategoryItemList());
                     }
 
                     @Override
@@ -122,7 +143,7 @@ public class CategoriesActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        categoriesDisposable.dispose();
+        compositeDisposable.dispose();
         tipsDisposable.dispose();
     }
 
@@ -167,6 +188,8 @@ public class CategoriesActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        paginationProgressBar = findViewById(R.id.progressBar_pagination);
     }
 
     private void enterFullScreenMode() {

@@ -47,6 +47,9 @@ public interface ApiService {
     @GET("day_exercises/{id}")
     Single<DayExercisesRequest> getDayExercises(@Path("id") int dayId);
 
+    @GET
+    Single<DayExercisesRequest> getDayExercises(@Url String url);
+
     @GET("faq")
     Single<FaqItemsRequest> getFaq();
 }

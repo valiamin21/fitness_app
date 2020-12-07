@@ -12,19 +12,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.data_models.Exercise;
 
 public class ExerciseItemsRecyclerAdapter extends RecyclerView.Adapter<ExerciseItemsRecyclerAdapter.ExerciseItemViewHolder> {
 
     private Context context;
-    private List<Exercise> exerciseList;
+    private List<Exercise> exerciseList = new ArrayList<>();
+    private Pagination pagination;
+    private int maxPaginationBound = 0;
 
-    public ExerciseItemsRecyclerAdapter(Context context, List<Exercise> exerciseList) {
+    public ExerciseItemsRecyclerAdapter(Context context, Pagination pagination) {
         this.context = context;
-        this.exerciseList = exerciseList;
+        this.pagination = pagination;
+    }
+
+    public void addItems(List<Exercise> exerciseList){
+        int insertStartPosition = this.exerciseList.size() + 1;
+        int insertItemCount = exerciseList.size();
+        this.exerciseList.addAll(exerciseList);
+        notifyItemRangeInserted(insertStartPosition, insertItemCount);
+
     }
 
     @NonNull
@@ -38,6 +50,14 @@ public class ExerciseItemsRecyclerAdapter extends RecyclerView.Adapter<ExerciseI
     @Override
     public void onBindViewHolder(@NonNull ExerciseItemViewHolder holder, int position) {
         holder.setData(exerciseList.get(position));
+
+        if(position == exerciseList.size() - 1){
+            if(maxPaginationBound < position){
+                pagination.onNextPage();
+            }else{
+                maxPaginationBound = position;
+            }
+        }
     }
 
     @Override

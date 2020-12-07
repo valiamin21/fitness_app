@@ -125,7 +125,7 @@ public class CategoriesActivity extends AppCompatActivity implements Pagination 
                         appBarLayout.setVisibility(View.VISIBLE);
                         splashContainer.setVisibility(View.GONE);
                         paginationProgressBar.setVisibility(View.INVISIBLE);
-                        nextPage = categoriesRequest.getNext();
+                        nextPage = categoriesRequest.getNextPage();
                         categoryItemsRecyclerAdapter.addItems(categoriesRequest.getCategoryItemList());
                     }
 

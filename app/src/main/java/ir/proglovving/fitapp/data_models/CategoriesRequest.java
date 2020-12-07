@@ -5,13 +5,14 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class CategoriesRequest {
-    private String next;
+    @SerializedName("next")
+    private String nextPage;
 
     @SerializedName("results")
     private List<CategoryItem> categoryItemList;
 
-    public String getNext(){
-        return next;
+    public String getNextPage(){
+        return nextPage;
     }
 
     public List<CategoryItem> getCategoryItemList() {

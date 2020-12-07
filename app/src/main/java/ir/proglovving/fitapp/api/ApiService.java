@@ -38,6 +38,9 @@ public interface ApiService {
     @GET("plan_days/{id}")
     Single<PlanDaysRequest> getPlanDays(@Path("id") int planId);
 
+    @GET
+    Single<PlanDaysRequest> getPlanDays(@Url String url);
+
     @GET("day/{id}")
     Single<Day> getDay(@Path("id") int dayId);
 

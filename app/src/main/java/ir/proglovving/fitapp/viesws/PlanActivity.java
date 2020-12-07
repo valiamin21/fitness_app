@@ -7,7 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
@@ -16,6 +21,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ir.proglovving.cfviews.CTypefaceProvider;
+import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.adapters.DayItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
@@ -23,14 +29,20 @@ import ir.proglovving.fitapp.api.RetrofitClient;
 import ir.proglovving.fitapp.data_models.Plan;
 import ir.proglovving.fitapp.data_models.PlanDaysRequest;
 
-public class PlanActivity extends AppCompatActivity {
+public class PlanActivity extends AppCompatActivity implements Pagination {
+
+    private static final String TAG = PlanActivity.class.getSimpleName();
 
     public static final String INTENT_KEY_PLAN_ID = "plan_id";
 
     private Toolbar toolbar;
     private RecyclerView dayItemsRecyclerView;
+    private ProgressBar paginationProgressBar;
 
+    private DayItemsRecyclerAdapter dayItemsRecyclerAdapter;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private ApiService apiService;
+    private String next="initial";
 
     public static void start(Context context, int planId) {
         Intent starter = new Intent(context, PlanActivity.class);
@@ -44,7 +56,10 @@ public class PlanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plan);
         initViews();
 
-        ApiService apiService = RetrofitClient.getApiService();
+        dayItemsRecyclerAdapter = new DayItemsRecyclerAdapter(this, this);
+        dayItemsRecyclerView.setAdapter(dayItemsRecyclerAdapter);
+
+        apiService = RetrofitClient.getApiService();
         Single<Plan> planCall = apiService.getPlan(getIntent().getIntExtra(INTENT_KEY_PLAN_ID, -1));
         planCall.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -65,26 +80,7 @@ public class PlanActivity extends AppCompatActivity {
                     }
                 });
 
-        Single<PlanDaysRequest> planDaysCall = apiService.getPlanDays(getIntent().getIntExtra(INTENT_KEY_PLAN_ID, -1));
-        planDaysCall.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<PlanDaysRequest>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        compositeDisposable.add(d);
-                    }
-
-                    @Override
-                    public void onSuccess(PlanDaysRequest planDaysRequest) {
-                        DayItemsRecyclerAdapter dayItemsRecyclerAdapter = new DayItemsRecyclerAdapter(PlanActivity.this, planDaysRequest.getDayItemList());
-                        dayItemsRecyclerView.setAdapter(dayItemsRecyclerAdapter);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(PlanActivity.this, "error in loading plan days", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        onNextPage();
     }
 
     @Override
@@ -102,5 +98,41 @@ public class PlanActivity extends AppCompatActivity {
             }
         }, 10);
         dayItemsRecyclerView = findViewById(R.id.day_items_list_recyclerView);
+        paginationProgressBar = findViewById(R.id.progressBar_pagination);
+    }
+
+    @Override
+    public void onNextPage() {
+        if(next == null)
+            return;
+        paginationProgressBar.setVisibility(View.VISIBLE);
+        final Single<PlanDaysRequest> planDaysSingleObservable;
+        if(next.equals("initial")){
+            planDaysSingleObservable = apiService.getPlanDays(getIntent().getIntExtra(INTENT_KEY_PLAN_ID, -1));
+        }else{
+            planDaysSingleObservable = apiService.getPlanDays(next);
+        }
+        planDaysSingleObservable.subscribeOn(Schedulers.io())
+                .delay(2, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<PlanDaysRequest>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        compositeDisposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(PlanDaysRequest planDaysRequest) {
+                        dayItemsRecyclerAdapter.addItems(planDaysRequest.getDayItemList());
+                        next = planDaysRequest.getNextPage();
+                        paginationProgressBar.setVisibility(View.INVISIBLE);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(PlanActivity.this, "error in loading plan days", Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "onError: " + e.getMessage());
+                    }
+                });
     }
 }

@@ -9,8 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.Utilities;
 import ir.proglovving.fitapp.data_models.Day;
@@ -19,11 +21,18 @@ import ir.proglovving.fitapp.viesws.DayActivity;
 public class DayItemsRecyclerAdapter extends RecyclerView.Adapter<DayItemsRecyclerAdapter.DayItemViewHolder> {
 
     private Context context;
-    private List<Day> dayItemList;
+    private List<Day> dayItemList = new ArrayList<>();
+    private Pagination pagination;
+    private int maxPaginationBound = 0;
 
-    public DayItemsRecyclerAdapter(Context context, List<Day> dayItemList) {
+    public DayItemsRecyclerAdapter(Context context, Pagination pagination) {
         this.context = context;
-        this.dayItemList = dayItemList;
+        this.pagination = pagination;
+    }
+
+    public void addItems(List<Day> dayItemList){
+        this.dayItemList.addAll(dayItemList);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -42,6 +51,14 @@ public class DayItemsRecyclerAdapter extends RecyclerView.Adapter<DayItemsRecycl
                 DayActivity.start(context, dayItemList.get(position));
             }
         });
+
+        if(position == dayItemList.size() - 1){
+            if(maxPaginationBound < position){
+                pagination.onNextPage();
+            }else{
+                maxPaginationBound = position;
+            }
+        }
     }
 
     @Override

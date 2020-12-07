@@ -5,23 +5,17 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Category {
-    private int count;
+    @SerializedName("next")
+    private String nextPage;
+
     @SerializedName("results")
     private List<PlanItem> planItemList;
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
+    public String getNextPage(){
+        return nextPage;
     }
 
     public List<PlanItem> getPlanItemList() {
         return planItemList;
-    }
-
-    public void setPlanItemList(List<PlanItem> planItemList) {
-        this.planItemList = planItemList;
     }
 }

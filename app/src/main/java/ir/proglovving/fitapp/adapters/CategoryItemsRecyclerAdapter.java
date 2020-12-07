@@ -55,7 +55,7 @@ public class CategoryItemsRecyclerAdapter extends RecyclerView.Adapter<CategoryI
 
         if (position == categoryItemList.size() - 1) {
             if (maxPaginationBound < position) {
-                pagination.onNext();
+                pagination.onNextPage();
             } else {
                 maxPaginationBound = position;
             }

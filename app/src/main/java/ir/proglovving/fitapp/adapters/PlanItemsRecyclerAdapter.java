@@ -13,20 +13,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.data_models.PlanItem;
 import ir.proglovving.fitapp.viesws.PlanActivity;
 
 public class PlanItemsRecyclerAdapter extends RecyclerView.Adapter<PlanItemsRecyclerAdapter.PlanItemViewHolder> {
     private Context context;
-    private List<PlanItem> planItemList;
+    private List<PlanItem> planItemList = new ArrayList<>();
+    private Pagination pagination;
+    private int maxPaginationBound = 0;
 
-    public PlanItemsRecyclerAdapter(Context context, List<PlanItem> planItemList) {
+    public PlanItemsRecyclerAdapter(Context context, Pagination pagination) {
         this.context = context;
-        this.planItemList = planItemList;
+        this.pagination = pagination;
+    }
+
+    public void addItems(List<PlanItem> planItemList){
+        this.planItemList.addAll(planItemList);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -38,6 +47,14 @@ public class PlanItemsRecyclerAdapter extends RecyclerView.Adapter<PlanItemsRecy
     @Override
     public void onBindViewHolder(@NonNull PlanItemViewHolder holder, final int position) {
         holder.setData(planItemList.get(position));
+
+        if(position == planItemList.size() - 1){
+            if(maxPaginationBound < position){
+                pagination.onNextPage();
+            }else{
+                maxPaginationBound = position;
+            }
+        }
     }
 
     @Override

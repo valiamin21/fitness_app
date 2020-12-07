@@ -67,7 +67,7 @@ public class CategoriesActivity extends AppCompatActivity {
 
         categoryItemsRecyclerAdapter = new CategoryItemsRecyclerAdapter(CategoriesActivity.this, new Pagination() {
             @Override
-            public void onNext() {
+            public void onNextPage() {
                 loadCategories();
             }
         });

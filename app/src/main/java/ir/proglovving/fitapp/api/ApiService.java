@@ -29,6 +29,9 @@ public interface ApiService {
     @GET("category/{id}")
     Single<Category> getCategory(@Path("id") int categoryId);
 
+    @GET
+    Single<Category> getCategory(@Url String url);
+
     @GET("plan/{id}")
     Single<Plan> getPlan(@Path("id") int planId);
 

@@ -40,7 +40,7 @@ import ir.proglovving.fitapp.api.RetrofitClient;
 import ir.proglovving.fitapp.data_models.CategoriesRequest;
 import ir.proglovving.fitapp.data_models.Tip;
 
-public class CategoriesActivity extends AppCompatActivity {
+public class CategoriesActivity extends AppCompatActivity implements Pagination {
 
     private static final String TAG = "MainActivity";
 
@@ -65,12 +65,7 @@ public class CategoriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_categories);
         initViews();
 
-        categoryItemsRecyclerAdapter = new CategoryItemsRecyclerAdapter(CategoriesActivity.this, new Pagination() {
-            @Override
-            public void onNextPage() {
-                loadCategories();
-            }
-        });
+        categoryItemsRecyclerAdapter = new CategoryItemsRecyclerAdapter(CategoriesActivity.this, this);
         categoryItemListRecyclerView.setAdapter(categoryItemsRecyclerAdapter);
 
         apiService = RetrofitClient.getApiService();
@@ -90,7 +85,7 @@ public class CategoriesActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(List<Tip> tips) {
                         motivationSentenceTextView.setText(tips.get(new Random(SystemClock.currentThreadTimeMillis()).nextInt(tips.size())).getText());
-                        loadCategories();
+                        onNextPage();
                     }
 
                     @Override
@@ -101,7 +96,8 @@ public class CategoriesActivity extends AppCompatActivity {
 
     }
 
-    private void loadCategories() {
+    @Override
+    public void onNextPage() {
         if(nextPage == null)
             return;
 

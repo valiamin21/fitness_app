@@ -28,6 +28,7 @@ import ir.proglovving.fitapp.api.RetrofitClient;
 import ir.proglovving.fitapp.data_models.Day;
 import ir.proglovving.fitapp.data_models.DayExercisesRequest;
 import ir.proglovving.fitapp.viesws.fragments.ExerciseListFragment;
+import ir.proglovving.fitapp.viesws.fragments.RestDayFragment;
 
 public class DayActivity extends AppCompatActivity{
 
@@ -55,6 +56,7 @@ public class DayActivity extends AppCompatActivity{
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, ExerciseListFragment.newInstance(dayId, dayTitle, dayMuscles))
+//                .add(R.id.fragment_container, RestDayFragment.newInstance())
                 .commit();
 
     }

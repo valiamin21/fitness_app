@@ -24,4 +24,6 @@
 
     <dimen name="app_icon_size">32dp</dimen>
     <dimen name="app_icon_size_x">40dp</dimen>
+
+    <dimen name="round_button_radius">20dp</dimen>
 </resources>

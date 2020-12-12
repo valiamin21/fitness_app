@@ -13,7 +13,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".viesws.activities.CommonQuestionsActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".viesws.activities.DayActivity" />
         <activity android:name=".viesws.activities.PlanActivity" />
         <activity android:name=".viesws.activities.CategoryActivity" />

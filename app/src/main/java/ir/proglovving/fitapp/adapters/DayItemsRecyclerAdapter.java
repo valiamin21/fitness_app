@@ -16,7 +16,7 @@ import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.Utilities;
 import ir.proglovving.fitapp.data_models.Day;
-import ir.proglovving.fitapp.viesws.DayActivity;
+import ir.proglovving.fitapp.viesws.activities.DayActivity;
 
 public class DayItemsRecyclerAdapter extends RecyclerView.Adapter<DayItemsRecyclerAdapter.DayItemViewHolder> {
 

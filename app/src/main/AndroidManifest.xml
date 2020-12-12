@@ -12,12 +12,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".viesws.CommonQuestionsActivity"
+            android:name=".viesws.activities.CommonQuestionsActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".viesws.DayActivity" />
-        <activity android:name=".viesws.PlanActivity" />
-        <activity android:name=".viesws.CategoryActivity" />
-        <activity android:name=".viesws.CategoriesActivity">
+        <activity android:name=".viesws.activities.DayActivity" />
+        <activity android:name=".viesws.activities.PlanActivity" />
+        <activity android:name=".viesws.activities.CategoryActivity" />
+        <activity android:name=".viesws.activities.CategoriesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

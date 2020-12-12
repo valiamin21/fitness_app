@@ -20,7 +20,7 @@ import java.util.Random;
 import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.data_models.PlanItem;
-import ir.proglovving.fitapp.viesws.PlanActivity;
+import ir.proglovving.fitapp.viesws.activities.PlanActivity;
 
 public class PlanItemsRecyclerAdapter extends RecyclerView.Adapter<PlanItemsRecyclerAdapter.PlanItemViewHolder> {
     private Context context;

@@ -18,7 +18,7 @@ import java.util.List;
 import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.data_models.CategoryItem;
-import ir.proglovving.fitapp.viesws.CategoryActivity;
+import ir.proglovving.fitapp.viesws.activities.CategoryActivity;
 
 public class CategoryItemsRecyclerAdapter extends RecyclerView.Adapter<CategoryItemsRecyclerAdapter.CategoryItemViewHolder> {
     private Context context;

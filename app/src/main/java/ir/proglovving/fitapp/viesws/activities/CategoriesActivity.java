@@ -1,4 +1,4 @@
-package ir.proglovving.fitapp.viesws;
+package ir.proglovving.fitapp.viesws.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;

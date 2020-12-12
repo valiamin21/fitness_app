@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="rtl"
-    tools:context=".viesws.DayActivity">
+    tools:context=".viesws.activities.DayActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

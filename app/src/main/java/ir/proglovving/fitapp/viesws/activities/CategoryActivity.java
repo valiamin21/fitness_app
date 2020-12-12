@@ -1,4 +1,4 @@
-package ir.proglovving.fitapp.viesws;
+package ir.proglovving.fitapp.viesws.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;

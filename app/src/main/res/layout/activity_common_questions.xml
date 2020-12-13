@@ -26,9 +26,17 @@
         android:id="@+id/faq_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:reverseLayout="false"
-        android:orientation="vertical"/>
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:reverseLayout="false" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_pagination"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="@dimen/standard_margin" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

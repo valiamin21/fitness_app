@@ -11,19 +11,30 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.data_models.FaqItem;
 
 public class FaqItemsRecyclerAdapter extends RecyclerView.Adapter<FaqItemsRecyclerAdapter.FaqViewHolder> {
 
     private final Context context;
-    private final List<FaqItem> faqItemList;
+    private List<FaqItem> faqItemList = new ArrayList<>();
+    private Pagination pagination;
+    private int maxPaginationBound = 0;
 
-    public FaqItemsRecyclerAdapter(Context context, List<FaqItem> faqItemList) {
+    public FaqItemsRecyclerAdapter(Context context, Pagination pagination) {
         this.context = context;
-        this.faqItemList = faqItemList;
+        this.pagination = pagination;
+    }
+
+    public void addItems(List<FaqItem> faqItemList) {
+        int insertStartPosition = this.faqItemList.size();
+        int itemsCount = faqItemList.size();
+        this.faqItemList.addAll(faqItemList);
+        notifyItemRangeInserted(insertStartPosition, itemsCount);
     }
 
     @NonNull
@@ -35,6 +46,13 @@ public class FaqItemsRecyclerAdapter extends RecyclerView.Adapter<FaqItemsRecycl
     @Override
     public void onBindViewHolder(@NonNull FaqViewHolder holder, int position) {
         holder.setData(faqItemList.get(position), position);
+        if (position == getItemCount() - 1) {
+            if (maxPaginationBound < position) {
+                pagination.onNextPage();
+            } else {
+                maxPaginationBound = position;
+            }
+        }
     }
 
     @Override

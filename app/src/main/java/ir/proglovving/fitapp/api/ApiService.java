@@ -52,4 +52,7 @@ public interface ApiService {
 
     @GET("faq")
     Single<FaqItemsRequest> getFaq();
+
+    @GET
+    Single<FaqItemsRequest> getFaq(@Url String url);
 }

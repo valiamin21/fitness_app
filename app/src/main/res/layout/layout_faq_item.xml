@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/standard_margin"
+    android:layout_marginBottom="@dimen/standard_margin"
     android:layout_marginRight="@dimen/standard_margin"
     android:layout_marginLeft="@dimen/standard_margin"
     android:clickable="true"
@@ -40,7 +41,7 @@
                 android:layout_marginRight="@dimen/standard_margin"
                 android:layout_weight="1"
                 android:textColor="@color/textColorPrimary"
-                android:textSize="@dimen/standard_font_size_very_large"
+                android:textSize="@dimen/standard_font_size_large"
                 android:textStyle="bold"
                 tools:text="چرا باید گرم کنم" />
 
@@ -54,7 +55,7 @@
             android:layout_marginTop="@dimen/standard_margin"
             android:layout_marginRight="@dimen/standard_margin_x2"
             android:textColor="@color/textColorSecondary"
-            android:textSize="@dimen/standard_font_size_large"
+            android:textSize="@dimen/standard_font_size_normal"
             android:visibility="gone"
             tools:text="گرم کردن قبل از ورزش باعث آمادگی بدن شما برای فعالیت جسمانی شدید می‌شود و از بروز آسیب‌های غیر منتظره جلوگیری می‌کند." />
 

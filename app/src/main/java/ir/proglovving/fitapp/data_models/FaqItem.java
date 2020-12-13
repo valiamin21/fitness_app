@@ -5,8 +5,6 @@ public class FaqItem {
     private String question;
     private String answer;
 
-    private boolean expanded = false;
-
     public int getId() {
         return id;
     }
@@ -29,13 +27,5 @@ public class FaqItem {
 
     public void setAnswer(String answer) {
         this.answer = answer;
-    }
-
-    public boolean isExpanded() {
-        return expanded;
-    }
-
-    public void setExpanded(boolean expanded) {
-        this.expanded = expanded;
     }
 }

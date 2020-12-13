@@ -25,6 +25,8 @@ public class FaqItemsRecyclerAdapter extends RecyclerView.Adapter<FaqItemsRecycl
     private Pagination pagination;
     private int maxPaginationBound = 0;
 
+    private int expandedItem =  -1;
+
     public FaqItemsRecyclerAdapter(Context context, Pagination pagination) {
         this.context = context;
         this.pagination = pagination;
@@ -72,15 +74,21 @@ public class FaqItemsRecyclerAdapter extends RecyclerView.Adapter<FaqItemsRecycl
             arrowButton = itemView.findViewById(R.id.arrow_imageButton);
         }
 
-        void expandToggle(FaqItem faqItem, int position) {
-            faqItem.setExpanded(!faqItem.isExpanded());
+        void expandToggle(int position) {
+            if(expandedItem == position){
+                expandedItem = -1;
+            }else{
+                int tmp = expandedItem;
+                expandedItem = position;
+                notifyItemChanged(tmp);
+            }
             notifyItemChanged(position);
         }
 
-        public void setData(final FaqItem faqItem, final int position) {
+        public void setData(FaqItem faqItem, final int position) {
             questionTextView.setText(faqItem.getQuestion());
             answerTextView.setText(faqItem.getAnswer());
-            if (faqItem.isExpanded()) {
+            if (expandedItem == position) {
                 answerTextView.setVisibility(View.VISIBLE);
                 arrowButton.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_24);
             } else {
@@ -92,14 +100,14 @@ public class FaqItemsRecyclerAdapter extends RecyclerView.Adapter<FaqItemsRecycl
             arrowButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    expandToggle(faqItem, position);
+                    expandToggle(position);
                 }
             });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    expandToggle(faqItem, position);
+                    expandToggle(position);
                 }
             });
         }

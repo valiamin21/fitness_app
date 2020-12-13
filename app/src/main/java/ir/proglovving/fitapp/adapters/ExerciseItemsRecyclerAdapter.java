@@ -32,7 +32,7 @@ public class ExerciseItemsRecyclerAdapter extends RecyclerView.Adapter<ExerciseI
     }
 
     public void addItems(List<Exercise> exerciseList){
-        int insertStartPosition = this.exerciseList.size() + 1;
+        int insertStartPosition = this.exerciseList.size();
         int insertItemCount = exerciseList.size();
         this.exerciseList.addAll(exerciseList);
         notifyItemRangeInserted(insertStartPosition, insertItemCount);

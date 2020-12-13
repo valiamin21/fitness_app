@@ -32,8 +32,10 @@ public class CategoryItemsRecyclerAdapter extends RecyclerView.Adapter<CategoryI
     }
 
     public void addItems(List<CategoryItem> categoryItemList) {
+        int insertStartPosition = this.categoryItemList.size();
+        int insertItemCount = categoryItemList.size();
         this.categoryItemList.addAll(categoryItemList);
-        notifyDataSetChanged();
+        notifyItemRangeInserted(insertStartPosition, insertItemCount);
     }
 
     @NonNull

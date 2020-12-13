@@ -34,8 +34,10 @@ public class PlanItemsRecyclerAdapter extends RecyclerView.Adapter<PlanItemsRecy
     }
 
     public void addItems(List<PlanItem> planItemList){
+        int insertStartPosition = this.planItemList.size();
+        int insertItemCount = planItemList.size();
         this.planItemList.addAll(planItemList);
-        notifyDataSetChanged();
+        notifyItemRangeInserted(insertStartPosition, insertItemCount);
     }
 
     @NonNull

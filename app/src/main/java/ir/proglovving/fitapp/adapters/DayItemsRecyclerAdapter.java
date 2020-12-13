@@ -31,8 +31,10 @@ public class DayItemsRecyclerAdapter extends RecyclerView.Adapter<DayItemsRecycl
     }
 
     public void addItems(List<Day> dayItemList){
+        int insertStartPosition = this.dayItemList.size();
+        int insertItemCount = dayItemList.size();
         this.dayItemList.addAll(dayItemList);
-        notifyDataSetChanged();
+        notifyItemRangeInserted(insertStartPosition, insertItemCount);
     }
 
     @NonNull

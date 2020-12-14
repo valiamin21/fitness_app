@@ -95,8 +95,10 @@ public class PlanActivity extends AppCompatActivity implements Pagination {
             @Override
             public void run() {
                 CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(PlanActivity.this));
+                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(PlanActivity.this)); // wtf :D it works if I put this line twice but not works with one
             }
         }, 10);
+        CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(PlanActivity.this));
         dayItemsRecyclerView = findViewById(R.id.day_items_list_recyclerView);
         paginationProgressBar = findViewById(R.id.progressBar_pagination);
     }

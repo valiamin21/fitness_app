@@ -95,7 +95,7 @@ public class PlanActivity extends AppCompatActivity implements Pagination {
             @Override
             public void run() {
                 CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(PlanActivity.this));
-                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(PlanActivity.this)); // wtf :D it works if I put this line twice but not works with one
+                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(PlanActivity.this)); // wtf :D it works if I put this line twice, but doesn't work with one
             }
         }, 10);
         CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(PlanActivity.this));

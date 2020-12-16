@@ -1,7 +1,9 @@
 package ir.proglovving.fitapp.viesws.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,6 +51,8 @@ public class ExerciseListFragment extends Fragment implements Pagination{
     private ProgressBar paginationProgressBar;
 
 
+    ExerciseItemsRecyclerAdapter.ExerciseSelectionListener exerciseSelectionListener;
+
     private void initViews() {
 
     }
@@ -84,6 +88,16 @@ public class ExerciseListFragment extends Fragment implements Pagination{
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try{
+            exerciseSelectionListener = (ExerciseItemsRecyclerAdapter.ExerciseSelectionListener)context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(context.toString() + " must implement ExerciseSelectionListener");
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercise_list, container, false);
@@ -100,7 +114,7 @@ public class ExerciseListFragment extends Fragment implements Pagination{
         exercisesRecyclerView = view.findViewById(R.id.exercise_items_list_recyclerView);
         paginationProgressBar = view.findViewById(R.id.progressBar_pagination);
 
-        exerciseItemsRecyclerAdapter = new ExerciseItemsRecyclerAdapter(getContext(), this);
+        exerciseItemsRecyclerAdapter = new ExerciseItemsRecyclerAdapter(getContext(), this, exerciseSelectionListener);
         exercisesRecyclerView.setAdapter(exerciseItemsRecyclerAdapter);
 
 

@@ -27,14 +27,14 @@
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/standard_font_size_very_large"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/tv_exerciseTime"
+            app:layout_constraintBottom_toTopOf="@+id/tv_nextExerciseTime"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="نام ورزش" />
 
         <ir.proglovving.cfviews.CfTextView
-            android:id="@+id/tv_exerciseTime"
+            android:id="@+id/tv_nextExerciseTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"

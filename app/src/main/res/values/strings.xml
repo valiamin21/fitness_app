@@ -11,4 +11,7 @@
     <string name="rest_day">روز استراحت</string>
     <string name="rest_day_message">امروز روز استراحتته. برو خوش بگذرون😉</string>
     <string name="ok">باشه</string>
+    <string name="take_some_rest">کمی استراحت کنید</string>
+    <string name="closing">بستن</string>
+    <string name="next">بعدی</string>
 </resources>

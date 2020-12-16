@@ -5,6 +5,7 @@
     <color name="colorAccent">@color/colorPrimary</color>
     <color name="textColorPrimary">#455a63</color>
     <color name="textColorSecondary">#738993</color>
+    <color name="textColorLight">@android:color/white</color>
     <color name="windowBackgroundColor">#f5f5f6</color>
 
     <color name="picturesTextColor">@android:color/white</color>

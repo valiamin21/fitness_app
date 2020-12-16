@@ -23,12 +23,14 @@ public class ExerciseItemsRecyclerAdapter extends RecyclerView.Adapter<ExerciseI
 
     private Context context;
     private List<Exercise> exerciseList = new ArrayList<>();
+    ExerciseSelectionListener exerciseSelectionListener;
     private Pagination pagination;
     private int maxPaginationBound = 0;
 
-    public ExerciseItemsRecyclerAdapter(Context context, Pagination pagination) {
+    public ExerciseItemsRecyclerAdapter(Context context, Pagination pagination, ExerciseSelectionListener exerciseSelectionListener) {
         this.context = context;
         this.pagination = pagination;
+        this.exerciseSelectionListener = exerciseSelectionListener;
     }
 
     public void addItems(List<Exercise> exerciseList){
@@ -75,10 +77,10 @@ public class ExerciseItemsRecyclerAdapter extends RecyclerView.Adapter<ExerciseI
             exerciseImage = itemView.findViewById(R.id.exercise_image);
             doneCheckImage = itemView.findViewById(R.id.image_doneCheck);
             exerciseTitleTextView = itemView.findViewById(R.id.tv_exerciseTitle);
-            exerciseTimeTextView = itemView.findViewById(R.id.tv_exerciseTime);
+            exerciseTimeTextView = itemView.findViewById(R.id.tv_nextExerciseTime);
         }
 
-        public void setData(Exercise exercise) {
+        public void setData(final Exercise exercise) {
             Glide.with(context).load(exercise.getGif()).into(exerciseImage);
             exerciseTitleTextView.setText(exercise.getTitle());
 
@@ -86,6 +88,18 @@ public class ExerciseItemsRecyclerAdapter extends RecyclerView.Adapter<ExerciseI
             exerciseTimeTextView.setText(String.format("%02d", exercise.getTime() / 60));
             exerciseTimeTextView.append(":");
             exerciseTimeTextView.append(String.format("%02d", exercise.getTime() % 60));
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    exerciseSelectionListener.onClick(exercise);
+                }
+            });
         }
+    }
+
+
+    public interface ExerciseSelectionListener{
+        void onClick(Exercise exercise);
     }
 }

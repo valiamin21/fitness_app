@@ -1,36 +1,17 @@
 package ir.proglovving.fitapp.viesws.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.appcompat.app.AppCompatActivity;;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
-
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import ir.proglovving.cfviews.CTypefaceProvider;
-import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.adapters.ExerciseItemsRecyclerAdapter;
-import ir.proglovving.fitapp.api.ApiService;
-import ir.proglovving.fitapp.api.RetrofitClient;
 import ir.proglovving.fitapp.data_models.Day;
-import ir.proglovving.fitapp.data_models.DayExercisesRequest;
+import ir.proglovving.fitapp.data_models.Exercise;
 import ir.proglovving.fitapp.viesws.fragments.ExerciseListFragment;
-import ir.proglovving.fitapp.viesws.fragments.RestDayFragment;
+import ir.proglovving.fitapp.viesws.fragments.ExerciseRestFragment;
 
-public class DayActivity extends AppCompatActivity{
+public class DayActivity extends AppCompatActivity implements ExerciseItemsRecyclerAdapter.ExerciseSelectionListener {
 
     public static final String INTENT_KEY_DAY_ID = "dayId";
     public static final String INTENT_KEY_DAY_TITLE = "dayTitle";
@@ -59,5 +40,13 @@ public class DayActivity extends AppCompatActivity{
 //                .add(R.id.fragment_container, RestDayFragment.newInstance())
                 .commit();
 
+    }
+
+    @Override
+    public void onClick(Exercise exercise) {
+        getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .add(R.id.fragment_container, ExerciseRestFragment.newInstance(20, exercise))
+                .commit();
     }
 }

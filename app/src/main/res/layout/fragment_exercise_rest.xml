@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".viesws.fragments.ExerciseRestFragment">
+
+
+    <ir.proglovving.cfviews.CfTextView
+        android:id="@+id/txt_restMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/standard_margin_x2"
+        android:text="@string/take_some_rest"
+        android:textColor="@color/textColorLight"
+        android:textSize="@dimen/standard_font_size_large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_restRemainingTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ir.proglovving.cfviews.CfTextView
+        android:id="@+id/tv_restRemainingTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColorLight"
+        android:textSize="@dimen/standard_font_size_very_large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/cardView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="00:18" />
+
+    <ir.proglovving.cfviews.CfButton
+        android:id="@+id/btn_closing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin_x3"
+        android:text="@string/closing"
+        android:textSize="@dimen/standard_font_size_large"
+        app:layout_constraintEnd_toStartOf="@+id/btn_addTime"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_restRemainingTime" />
+
+    <ir.proglovving.cfviews.CfButton
+        android:id="@+id/btn_addTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/standard_margin"
+        android:inputType="text"
+        android:text="+20s"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_closing"
+        app:layout_constraintTop_toTopOf="@+id/btn_closing" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:cardElevation="@dimen/app_cards_elevation"
+        app:contentPadding="@dimen/standard_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.2">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_nextExercise"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:src="@drawable/logo" />
+
+            <ir.proglovving.cfviews.CfTextView
+                android:id="@+id/tv_nextProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/standard_margin"
+                android:textColor="@color/textColorSecondary"
+                android:textSize="@dimen/standard_font_size_normal"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="بعدی ۲۱/۴" />
+
+            <ir.proglovving.cfviews.CfTextView
+                android:id="@+id/tv_nextExerciseTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/standard_margin"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/standard_font_size_large"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tv_nextExerciseTime"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_nextProgress"
+                tools:text="درجا زدن" />
+
+            <ir.proglovving.cfviews.CfTextView
+                android:id="@+id/tv_nextExerciseTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/standard_margin"
+                android:textColor="@color/textColorSecondary"
+                android:textSize="@dimen/standard_font_size_normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:text="01:00" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

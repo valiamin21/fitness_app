@@ -2,7 +2,9 @@ package ir.proglovving.fitapp.data_models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Exercise {
+import java.io.Serializable;
+
+public class Exercise implements Serializable {
 
     private int id;
     private String title;

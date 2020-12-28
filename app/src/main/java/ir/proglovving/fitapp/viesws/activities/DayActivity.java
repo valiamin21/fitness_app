@@ -37,6 +37,7 @@ public class DayActivity extends AppCompatActivity implements ExerciseItemsRecyc
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, ExerciseListFragment.newInstance(dayId, dayTitle, dayMuscles))
+                // TODO: 12/28/20 showing RestDayFragment when required
 //                .add(R.id.fragment_container, RestDayFragment.newInstance())
                 .commit();
 

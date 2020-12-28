@@ -89,12 +89,12 @@ public class ExerciseItemsRecyclerAdapter extends RecyclerView.Adapter<ExerciseI
             exerciseTimeTextView.append(":");
             exerciseTimeTextView.append(String.format("%02d", exercise.getTime() % 60));
 
-            itemView.setOnClickListener(v -> exerciseSelectionListener.onClick(exercise));
+            itemView.setOnClickListener(v -> exerciseSelectionListener.onExerciseSelected(exercise));
         }
     }
 
 
     public interface ExerciseSelectionListener{
-        void onClick(Exercise exercise);
+        void onExerciseSelected(Exercise exercise);
     }
 }

@@ -8,6 +8,7 @@ import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.adapters.ExerciseItemsRecyclerAdapter;
 import ir.proglovving.fitapp.data_models.Day;
 import ir.proglovving.fitapp.data_models.Exercise;
+import ir.proglovving.fitapp.viesws.fragments.ExerciseGifFragment;
 import ir.proglovving.fitapp.viesws.fragments.ExerciseListFragment;
 import ir.proglovving.fitapp.viesws.fragments.ExerciseRestFragment;
 
@@ -44,7 +45,7 @@ public class DayActivity extends AppCompatActivity implements ExerciseItemsRecyc
     }
 
     @Override
-    public void onClick(Exercise exercise) {
+    public void onExerciseSelected(Exercise exercise) {
         getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .add(R.id.fragment_container, ExerciseRestFragment.newInstance(20, exercise))

@@ -53,8 +53,18 @@ public class ExerciseListFragment extends Fragment implements Pagination{
 
     ExerciseItemsRecyclerAdapter.ExerciseSelectionListener exerciseSelectionListener;
 
-    private void initViews() {
+    private void initViews(View view) {
+        toolbar = view.findViewById(R.id.toolbar);
+        toolbar.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(getContext()));
+            }
+        }, 10);
+        toolbar.setTitle(dayTitle);
 
+        exercisesRecyclerView = view.findViewById(R.id.exercise_items_list_recyclerView);
+        paginationProgressBar = view.findViewById(R.id.progressBar_pagination);
     }
 
 
@@ -101,23 +111,10 @@ public class ExerciseListFragment extends Fragment implements Pagination{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercise_list, container, false);
-
-        toolbar = view.findViewById(R.id.toolbar);
-        toolbar.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(getContext()));
-            }
-        }, 10);
-        toolbar.setTitle(dayTitle);
-
-        exercisesRecyclerView = view.findViewById(R.id.exercise_items_list_recyclerView);
-        paginationProgressBar = view.findViewById(R.id.progressBar_pagination);
+        initViews(view);
 
         exerciseItemsRecyclerAdapter = new ExerciseItemsRecyclerAdapter(getContext(), this, exerciseSelectionListener);
         exercisesRecyclerView.setAdapter(exerciseItemsRecyclerAdapter);
-
-
 
         apiService = RetrofitClient.getApiService();
         onNextPage();

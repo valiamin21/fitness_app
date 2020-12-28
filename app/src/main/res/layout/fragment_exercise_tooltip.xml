@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/windowBackgroundColor"
+    android:clickable="true"
+    tools:context=".viesws.fragments.ExerciseTooltipFragment">
+
+
+    <ImageButton
+        android:id="@+id/close_imageButton"
+        android:layout_width="@dimen/app_icon_size_x"
+        android:layout_height="@dimen/app_icon_size_x"
+        android:layout_margin="@dimen/standard_margin"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_baseline_close_24"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_exerciseGif"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        tools:src="@drawable/test_image"
+        app:layout_constraintBottom_toTopOf="@id/guideline_center"
+        app:layout_constraintTop_toBottomOf="@id/close_imageButton" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <ir.proglovving.cfviews.CfTextView
+        android:id="@+id/tv_exerciseTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/standard_font_size_very_large"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/guideline_center"
+        tools:text="حرکت پروانه" />
+
+    <ir.proglovving.cfviews.CfTextView
+        android:id="@+id/tv_walkthrough"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/standard_margin_x2"
+        android:paddingHorizontal="@dimen/standard_margin_x2"
+        android:textAlignment="center"
+        android:textColor="@color/textColorSecondary"
+        android:textSize="@dimen/standard_font_size_large"
+        app:layout_constraintTop_toBottomOf="@id/tv_exerciseTitle"
+        tools:text="حرکت دبلیوسی را انجام داده و سپس دمبل‌هارا در دستانتان نگه‌ٔارید" />
+
+
+    <ir.proglovving.cfviews.CfButton
+        android:id="@+id/btn_faq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/standard_margin"
+        android:text="@string/faq_underlined"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="?attr/selectableItemBackground"
+        android:padding="0dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

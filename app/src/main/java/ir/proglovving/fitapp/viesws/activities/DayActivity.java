@@ -11,6 +11,7 @@ import ir.proglovving.fitapp.data_models.Exercise;
 import ir.proglovving.fitapp.viesws.fragments.ExerciseGifFragment;
 import ir.proglovving.fitapp.viesws.fragments.ExerciseListFragment;
 import ir.proglovving.fitapp.viesws.fragments.ExerciseRestFragment;
+import ir.proglovving.fitapp.viesws.fragments.ExerciseTooltipFragment;
 
 public class DayActivity extends AppCompatActivity implements ExerciseItemsRecyclerAdapter.ExerciseSelectionListener {
 
@@ -48,7 +49,7 @@ public class DayActivity extends AppCompatActivity implements ExerciseItemsRecyc
     public void onExerciseSelected(Exercise exercise) {
         getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
-                .add(R.id.fragment_container, ExerciseRestFragment.newInstance(20, exercise))
+                .add(R.id.fragment_container, ExerciseTooltipFragment.newInstance(exercise))
                 .commit();
     }
 }

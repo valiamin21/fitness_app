@@ -3,6 +3,7 @@
 
     <string name="settings">تنظیمات</string>
     <string name="faq">سوالات پرتکرار</string>
+    <string name="faq_underlined"><u>سوالات پرتکرار</u></string>
     <string name="about_us">درباره ما</string>
     <string name="rate_in_bazar">نظر در کافه‌بازار</string>
     <string name="open">open</string>

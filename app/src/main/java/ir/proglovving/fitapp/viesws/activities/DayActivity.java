@@ -1,9 +1,12 @@
 package ir.proglovving.fitapp.viesws.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.adapters.ExerciseItemsRecyclerAdapter;
 import ir.proglovving.fitapp.data_models.Day;
@@ -13,7 +16,7 @@ import ir.proglovving.fitapp.viesws.fragments.ExerciseListFragment;
 import ir.proglovving.fitapp.viesws.fragments.ExerciseRestFragment;
 import ir.proglovving.fitapp.viesws.fragments.ExerciseTooltipFragment;
 
-public class DayActivity extends AppCompatActivity implements ExerciseItemsRecyclerAdapter.ExerciseSelectionListener {
+public class DayActivity extends AppCompatActivity implements ExerciseItemsRecyclerAdapter.ExerciseSelectionListener, ExerciseListFragment.OnExerciseStartListener {
 
     public static final String INTENT_KEY_DAY_ID = "dayId";
     public static final String INTENT_KEY_DAY_TITLE = "dayTitle";
@@ -51,5 +54,17 @@ public class DayActivity extends AppCompatActivity implements ExerciseItemsRecyc
                 .addToBackStack(null)
                 .add(R.id.fragment_container, ExerciseTooltipFragment.newInstance(exercise))
                 .commit();
+    }
+
+    @Override
+    public void onExerciseStart() {
+        // TODO: 1/2/21 implement body of this method
+        Toast.makeText(this, "exercise start", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onExerciseResume() {
+        // TODO: 1/2/21 implement body of this method
+        Toast.makeText(this, "exercise resume", Toast.LENGTH_SHORT).show();
     }
 }

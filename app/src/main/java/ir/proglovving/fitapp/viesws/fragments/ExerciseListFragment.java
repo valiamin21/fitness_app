@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -35,7 +36,7 @@ import ir.proglovving.fitapp.data_models.DayExercisesRequest;
  * Use the {@link ExerciseListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ExerciseListFragment extends Fragment implements Pagination{
+public class ExerciseListFragment extends Fragment implements Pagination {
 
     private static final String ARG_DAY_ID = "day_id";
     private static final String ARG_TOOLBAR_TITLE = "toolbar_title";
@@ -49,9 +50,11 @@ public class ExerciseListFragment extends Fragment implements Pagination{
     private Toolbar toolbar;
     private RecyclerView exercisesRecyclerView;
     private ProgressBar paginationProgressBar;
+    private Button startButton, resumeButton;
 
 
     ExerciseItemsRecyclerAdapter.ExerciseSelectionListener exerciseSelectionListener;
+    OnExerciseStartListener onExerciseStartListener;
 
     private void initViews(View view) {
         toolbar = view.findViewById(R.id.toolbar);
@@ -65,6 +68,9 @@ public class ExerciseListFragment extends Fragment implements Pagination{
 
         exercisesRecyclerView = view.findViewById(R.id.exercise_items_list_recyclerView);
         paginationProgressBar = view.findViewById(R.id.progressBar_pagination);
+
+        startButton = view.findViewById(R.id.btn_start);
+        resumeButton = view.findViewById(R.id.btn_resume);
     }
 
 
@@ -100,10 +106,16 @@ public class ExerciseListFragment extends Fragment implements Pagination{
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        try{
-            exerciseSelectionListener = (ExerciseItemsRecyclerAdapter.ExerciseSelectionListener)context;
-        }catch (ClassCastException e){
+        try {
+            exerciseSelectionListener = (ExerciseItemsRecyclerAdapter.ExerciseSelectionListener) context;
+        } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement ExerciseSelectionListener");
+        }
+
+        try {
+            onExerciseStartListener = (OnExerciseStartListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnExerciseStartListener");
         }
     }
 
@@ -112,6 +124,9 @@ public class ExerciseListFragment extends Fragment implements Pagination{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercise_list, container, false);
         initViews(view);
+
+        startButton.setOnClickListener(v -> onExerciseStartListener.onExerciseStart());
+        resumeButton.setOnClickListener(v -> onExerciseStartListener.onExerciseResume());
 
         exerciseItemsRecyclerAdapter = new ExerciseItemsRecyclerAdapter(getContext(), this, exerciseSelectionListener);
         exercisesRecyclerView.setAdapter(exerciseItemsRecyclerAdapter);
@@ -124,14 +139,14 @@ public class ExerciseListFragment extends Fragment implements Pagination{
 
     @Override
     public void onNextPage() {
-        if(next == null)
+        if (next == null)
             return;
 
         paginationProgressBar.setVisibility(View.VISIBLE);
         Single<DayExercisesRequest> dayExercisesRequestSingleObservable;
-        if(next.equals("initial")){
+        if (next.equals("initial")) {
             dayExercisesRequestSingleObservable = apiService.getDayExercises(dayId);
-        }else{
+        } else {
             dayExercisesRequestSingleObservable = apiService.getDayExercises(next);
         }
 
@@ -163,5 +178,11 @@ public class ExerciseListFragment extends Fragment implements Pagination{
     public void onDestroy() {
         super.onDestroy();
         compositeDisposable.dispose();
+    }
+
+    public interface OnExerciseStartListener {
+        void onExerciseStart();
+
+        void onExerciseResume();
     }
 }

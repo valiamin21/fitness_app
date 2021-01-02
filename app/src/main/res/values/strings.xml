@@ -15,4 +15,6 @@
     <string name="take_some_rest">کمی استراحت کنید</string>
     <string name="closing">بستن</string>
     <string name="next">بعدی</string>
+    <string name="start">شروع</string>
+    <string name="resume">ادامه</string>
 </resources>

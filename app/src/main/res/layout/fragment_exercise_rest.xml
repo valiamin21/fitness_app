@@ -8,7 +8,7 @@
     tools:context=".viesws.fragments.ExerciseRestFragment">
 
 
-    <ir.proglovving.cfviews.CfTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/txt_restMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ir.proglovving.cfviews.CfTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_restRemainingTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="00:18" />
 
-    <ir.proglovving.cfviews.CfButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_closing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_restRemainingTime" />
 
-    <ir.proglovving.cfviews.CfButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_addTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 tools:src="@drawable/logo" />
 
-            <ir.proglovving.cfviews.CfTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_nextProgress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="بعدی ۲۱/۴" />
 
-            <ir.proglovving.cfviews.CfTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_nextExerciseTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_nextProgress"
                 tools:text="درجا زدن" />
 
-            <ir.proglovving.cfviews.CfTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_nextExerciseTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

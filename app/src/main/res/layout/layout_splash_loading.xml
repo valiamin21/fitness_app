@@ -8,7 +8,7 @@
     android:background="@drawable/splash_image"
     tools:context=".viesws.activities.CategoriesActivity">
 
-    <ir.proglovving.cfviews.CfTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/motivation_sentence_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

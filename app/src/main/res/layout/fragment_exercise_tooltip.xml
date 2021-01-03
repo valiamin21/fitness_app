@@ -36,7 +36,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
 
-    <ir.proglovving.cfviews.CfTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_exerciseTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@id/guideline_center"
         tools:text="حرکت پروانه" />
 
-    <ir.proglovving.cfviews.CfTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_walkthrough"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
         tools:text="حرکت دبلیوسی را انجام داده و سپس دمبل‌هارا در دستانتان نگه‌ٔارید" />
 
 
-    <ir.proglovving.cfviews.CfButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_faq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

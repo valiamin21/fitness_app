@@ -23,7 +23,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import ir.proglovving.cfviews.CTypefaceProvider;
 import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.adapters.ExerciseItemsRecyclerAdapter;
@@ -58,12 +57,6 @@ public class ExerciseListFragment extends Fragment implements Pagination {
 
     private void initViews(View view) {
         toolbar = view.findViewById(R.id.toolbar);
-        toolbar.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(getContext()));
-            }
-        }, 10);
         toolbar.setTitle(dayTitle);
 
         exercisesRecyclerView = view.findViewById(R.id.exercise_items_list_recyclerView);

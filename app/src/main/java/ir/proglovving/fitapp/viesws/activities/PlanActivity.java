@@ -20,7 +20,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import ir.proglovving.cfviews.CTypefaceProvider;
 import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.adapters.DayItemsRecyclerAdapter;
@@ -91,14 +90,6 @@ public class PlanActivity extends AppCompatActivity implements Pagination {
 
     private void initViews() {
         toolbar = findViewById(R.id.toolbar);
-        toolbar.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(PlanActivity.this));
-                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(PlanActivity.this)); // wtf :D it works if I put this line twice, but doesn't work with one
-            }
-        }, 10);
-        CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(PlanActivity.this));
         dayItemsRecyclerView = findViewById(R.id.day_items_list_recyclerView);
         paginationProgressBar = findViewById(R.id.progressBar_pagination);
     }

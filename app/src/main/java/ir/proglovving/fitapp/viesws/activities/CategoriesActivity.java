@@ -30,7 +30,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import ir.proglovving.cfviews.CTypefaceProvider;
 import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.Utilities;
@@ -150,13 +149,6 @@ public class CategoriesActivity extends AppCompatActivity implements Pagination 
         appBarLayout = findViewById(R.id.appbarLayout);
         appBarLayout.setVisibility(View.INVISIBLE);
         final Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(CategoriesActivity.this));
-            }
-        }, 10);
-
 
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle drawerToggle =
@@ -165,24 +157,15 @@ public class CategoriesActivity extends AppCompatActivity implements Pagination 
         drawerToggle.syncState();
 
         navigationView = findViewById(R.id.navigation_view);
-        navigationView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Utilities.applyFontForNavigationView(CategoriesActivity.this, navigationView);
+        navigationView.setNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.faq:
+                    CommonQuestionsActivity.start(CategoriesActivity.this);
+                    break;
+                default:
+                    Toast.makeText(CategoriesActivity.this, "clicked " + item.getTitle(), Toast.LENGTH_SHORT).show();
             }
-        }, 10);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.faq:
-                        CommonQuestionsActivity.start(CategoriesActivity.this);
-                        break;
-                    default:
-                        Toast.makeText(CategoriesActivity.this, "clicked " + item.getTitle(), Toast.LENGTH_SHORT).show();
-                }
-                return false;
-            }
+            return false;
         });
 
         paginationProgressBar = findViewById(R.id.progressBar_pagination);

@@ -20,7 +20,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import ir.proglovving.cfviews.CTypefaceProvider;
 import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.adapters.FaqItemsRecyclerAdapter;
@@ -58,21 +57,10 @@ public class CommonQuestionsActivity extends AppCompatActivity implements Pagina
 
     private void initViews() {
         toolbar = findViewById(R.id.toolbar);
-        toolbar.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(CommonQuestionsActivity.this));
-            }
-        }, 10);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         faqRecyclerView = findViewById(R.id.faq_recyclerView);
         paginationProgressBar = findViewById(R.id.progressBar_pagination);

@@ -29,7 +29,7 @@
         app:layout_constraintHeight_percent="0.45"
         android:adjustViewBounds="true"/>
 
-    <ir.proglovving.cfviews.CfTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/cfTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rest_image" />
 
-    <ir.proglovving.cfviews.CfButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/rest_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

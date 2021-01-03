@@ -33,7 +33,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
 
-            <ir.proglovving.cfviews.CfTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/faq_question"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
 
         </LinearLayout>
 
-        <ir.proglovving.cfviews.CfTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/faq_answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

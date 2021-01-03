@@ -19,7 +19,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import ir.proglovving.cfviews.CTypefaceProvider;
 import ir.proglovving.fitapp.Pagination;
 import ir.proglovving.fitapp.R;
 import ir.proglovving.fitapp.adapters.PlanItemsRecyclerAdapter;
@@ -72,13 +71,6 @@ public class CategoryActivity extends AppCompatActivity implements Pagination {
         toolbar = findViewById(R.id.toolbar);
         planItemsRecyclerView = findViewById(R.id.plan_item_list_recycler_view);
         progressBar = findViewById(R.id.progressBar);
-
-        toolbar.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                CTypefaceProvider.applyFontForAViewGroup(toolbar, CTypefaceProvider.getVazir(CategoryActivity.this));
-            }
-        }, 10);
     }
 
     @Override

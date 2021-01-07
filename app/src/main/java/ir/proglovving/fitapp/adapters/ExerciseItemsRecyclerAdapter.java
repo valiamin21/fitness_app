@@ -22,24 +22,24 @@ import ir.proglovving.fitapp.data_models.Exercise;
 public class ExerciseItemsRecyclerAdapter extends RecyclerView.Adapter<ExerciseItemsRecyclerAdapter.ExerciseItemViewHolder> {
 
     private Context context;
-    private List<Exercise> exerciseList = new ArrayList<>();
     ExerciseSelectionListener exerciseSelectionListener;
+    private List<Exercise> exerciseList;
     private Pagination pagination;
     private int maxPaginationBound = 0;
 
-    public ExerciseItemsRecyclerAdapter(Context context, Pagination pagination, ExerciseSelectionListener exerciseSelectionListener) {
+    public ExerciseItemsRecyclerAdapter(Context context, Pagination pagination, List<Exercise> exerciseList, ExerciseSelectionListener exerciseSelectionListener) {
         this.context = context;
         this.pagination = pagination;
+        this.exerciseList = exerciseList;
         this.exerciseSelectionListener = exerciseSelectionListener;
     }
 
-    public void addItems(List<Exercise> exerciseList){
-        int insertStartPosition = this.exerciseList.size();
-        int insertItemCount = exerciseList.size();
-        this.exerciseList.addAll(exerciseList);
-        notifyItemRangeInserted(insertStartPosition, insertItemCount);
-
-    }
+//    public void addItems(List<Exercise> exerciseList){
+//        int insertStartPosition = this.exerciseList.size();
+//        int insertItemCount = exerciseList.size();
+//        this.exerciseList.addAll(exerciseList);
+//        notifyItemRangeInserted(insertStartPosition, insertItemCount);
+//    }
 
     @NonNull
     @Override

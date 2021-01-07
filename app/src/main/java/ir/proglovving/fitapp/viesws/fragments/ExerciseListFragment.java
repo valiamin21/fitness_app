@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
@@ -29,6 +31,8 @@ import ir.proglovving.fitapp.adapters.ExerciseItemsRecyclerAdapter;
 import ir.proglovving.fitapp.api.ApiService;
 import ir.proglovving.fitapp.api.RetrofitClient;
 import ir.proglovving.fitapp.data_models.DayExercisesRequest;
+import ir.proglovving.fitapp.data_models.Exercise;
+import ir.proglovving.fitapp.viesws.activities.DayActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +59,15 @@ public class ExerciseListFragment extends Fragment implements Pagination {
     ExerciseItemsRecyclerAdapter.ExerciseSelectionListener exerciseSelectionListener;
     OnExerciseStartListener onExerciseStartListener;
 
+    private ExerciseItemsRecyclerAdapter exerciseItemsRecyclerAdapter;
+    private ApiService apiService;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private String next = "initial";
+
+    public ExerciseListFragment() {
+        // Required empty public constructor
+    }
+
     private void initViews(View view) {
         toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle(dayTitle);
@@ -65,17 +78,6 @@ public class ExerciseListFragment extends Fragment implements Pagination {
         startButton = view.findViewById(R.id.btn_start);
         resumeButton = view.findViewById(R.id.btn_resume);
     }
-
-
-    private ExerciseItemsRecyclerAdapter exerciseItemsRecyclerAdapter;
-    private ApiService apiService;
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private String next = "initial";
-
-    public ExerciseListFragment() {
-        // Required empty public constructor
-    }
-
 
     public static ExerciseListFragment newInstance(int dayId, String toolbarTitle, String dayMuscles) {
         ExerciseListFragment fragment = new ExerciseListFragment();
@@ -121,7 +123,7 @@ public class ExerciseListFragment extends Fragment implements Pagination {
         startButton.setOnClickListener(v -> onExerciseStartListener.onExerciseStart());
         resumeButton.setOnClickListener(v -> onExerciseStartListener.onExerciseResume());
 
-        exerciseItemsRecyclerAdapter = new ExerciseItemsRecyclerAdapter(getContext(), this, exerciseSelectionListener);
+        exerciseItemsRecyclerAdapter = new ExerciseItemsRecyclerAdapter(getContext(), this, DayActivity.exerciseList, exerciseSelectionListener);
         exercisesRecyclerView.setAdapter(exerciseItemsRecyclerAdapter);
 
         apiService = RetrofitClient.getApiService();
@@ -157,7 +159,11 @@ public class ExerciseListFragment extends Fragment implements Pagination {
                     public void onSuccess(DayExercisesRequest dayExercisesRequest) {
                         paginationProgressBar.setVisibility(View.INVISIBLE);
                         next = dayExercisesRequest.getNextPage();
-                        exerciseItemsRecyclerAdapter.addItems(dayExercisesRequest.getExerciseList());
+
+                        int insertStartPosition = DayActivity.exerciseList.size();
+                        int insertItemCount = dayExercisesRequest.getExerciseList().size();
+                        DayActivity.exerciseList.addAll(dayExercisesRequest.getExerciseList());
+                        exerciseItemsRecyclerAdapter.notifyItemRangeInserted(insertStartPosition, insertItemCount);
                     }
 
                     @Override

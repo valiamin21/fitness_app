@@ -1,8 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".viesws.fragments.ExerciseGifFragment">
+    android:background="@color/windowBackgroundColor"
+    android:clickable="true"
+    tools:context=".viesws.fragments.ExerciseTooltipFragment">
 
-</FrameLayout>
+
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="@dimen/app_icon_size_x"
+        android:layout_height="@dimen/app_icon_size_x"
+        android:layout_margin="@dimen/standard_margin"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitCenter"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+
+    <ImageButton
+        android:id="@+id/btn_faq"
+        android:layout_width="@dimen/app_icon_size_x"
+        android:layout_height="@dimen/app_icon_size_x"
+        android:layout_margin="@dimen/standard_margin"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:paddingBottom="@dimen/small_margin"
+        android:scaleType="fitCenter"
+        android:tint="#707071"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_faq" />
+
+    <ImageView
+        android:id="@+id/img_exerciseGif"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@id/guideline_center"
+        app:layout_constraintTop_toBottomOf="@id/back_button"
+        tools:src="@drawable/test_image" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_exerciseTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin_x2"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/standard_font_size_large"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_center"
+        tools:text="حرکت پروانه" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/standard_margin_x2"
+        android:paddingHorizontal="@dimen/standard_margin_x2"
+        android:textAlignment="center"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/standard_font_size_very_large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/check_fab"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_exerciseTitle"
+        tools:text="20 تا" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/check_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/standard_margin"
+        android:visibility="invisible"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/ic_baseline_check_24"
+        app:tint="@color/windowBackgroundColor" />
+
+    <ImageButton
+        android:id="@+id/btn_previous_exercise"
+        android:layout_width="@dimen/app_icon_size_x"
+        android:layout_height="@dimen/app_icon_size_x"
+        android:layout_margin="@dimen/standard_margin_x2"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:srcCompat="@drawable/ic_left_arrow" />
+
+    <ImageButton
+        android:id="@+id/btn_next_exercise"
+        android:layout_width="@dimen/app_icon_size_x"
+        android:layout_height="@dimen/app_icon_size_x"
+        android:layout_margin="@dimen/standard_margin_x2"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/ic_right_arrow" />
+
+    <ImageButton
+        android:id="@+id/btn_resumeAndPause"
+        android:layout_width="@dimen/app_icon_size_x"
+        android:layout_height="@dimen/app_icon_size_x"
+        android:layout_margin="@dimen/standard_margin_x2"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/ic_pause" />
+
+    <!--    todo making custom progressbar-->
+</androidx.constraintlayout.widget.ConstraintLayout>
